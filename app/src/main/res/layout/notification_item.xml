@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        style="@style/TextAppearance.AppCompat.Small"
+        android:id="@+id/tvvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:background="@color/primary_color"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="8dp"
+        android:textAllCaps="false"
+        tools:text="Title" />
+
+    <RelativeLayout
+        android:id="@+id/layNoti"
+        android:background="@color/white"
+        android:layout_below="@+id/tvvDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="8dp"
+        android:paddingHorizontal="10dp">
+
+        <ImageView
+            android:id="@+id/tvDot"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/selected_indicator" />
+
+        <RelativeLayout
+            android:layout_toRightOf="@+id/tvDot"
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:id="@+id/time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toLeftOf="@+id/arrow"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginRight="10dp"
+                android:includeFontPadding="false"
+                android:lines="1"
+                android:maxLines="1"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                tools:text="Title" />
+
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/time"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/time"
+                android:includeFontPadding="false"
+                android:lines="1"
+                android:maxLines="1"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                tools:text="Title" />
+
+            <TextView
+                style="@style/TextAppearance.AppCompat.Small"
+                android:id="@+id/textDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_alignParentLeft="true"
+                android:layout_marginTop="-1dp"
+                android:layout_toLeftOf="@+id/arrow"
+                android:includeFontPadding="false"
+                android:lines="2"
+                android:maxLines="2"
+                android:textAllCaps="false"
+                tools:text="Description" />
+
+            <ImageView
+                android:visibility="visible"
+                android:id="@+id/arrow"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_forword_arrow" />
+        </RelativeLayout>-->
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/gray"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

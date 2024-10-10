@@ -1,0 +1,17 @@
+Utils utilities = new Utils();
+Symmetric symmetric = new Symmetric();
+DecryptionHelper helper = new DecryptionHelper();
+
+String privateKey = "your pvt key";
+
+byte[] decodedKey = utilities.decodeFromBase64(encryptedKey.getBytes());
+byte[] decodedContent = utilities.decodeFromBase64(encryptedData.getBytes());
+byte[] extractedIv = helper.extractBytes(decodedContent, 0, 16);
+byte[] extractedEncryptedContent = helper.extractBytes(decodedContent, 16, decodedContent.length);
+
+
+byte[] decryptedKey = asymmetric.decrypt(decodedKey, privateKey.getBytes(), "RSA", "RSA/ECB/PKCS1Padding");
+
+byte[] decryptedContent = symmetric.decrypt(extractedEncryptedContent, extractedIv, decryptedKey, "AES", "AES/CBC/PKCS5Padding");
+
+contentLogger.log("DECODED_DECRYPTED_CONTENT", new String(decryptedContent));

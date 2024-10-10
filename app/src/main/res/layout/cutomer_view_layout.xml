@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="list"
+            type="com.goglitter.domain.response.GlitterTestimonial" />
+    </data>
+
+    <RelativeLayout
+        android:layout_margin="4dp"
+        android:layout_width="280dp"
+        android:layout_height="200dp"
+        android:background="@drawable/_ic_rounded_rectangle_transperant">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDescription"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:hint="Go Glitter has\n helped\n me a lot in my investment plans. The support team was very helpful throughout this journey. I am very thankful to them for helping me through. "
+                    android:maxLines="5"
+                    android:layout_marginBottom="8dp"
+                    android:paddingBottom="8dp"
+                    android:textColor="@color/black"
+                    app:layout_constraintBottom_toTopOf="@+id/readMore"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:id="@+id/readMore"
+                    android:paddingVertical="8dp"
+                    android:fontFamily="@font/inter_regular"
+                    app:layout_constraintTop_toBottomOf="@+id/tvDescription"
+                    app:layout_constraintBottom_toTopOf="@+id/view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="..Read More"
+                    android:textColor="@color/primary_color"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="180dp"
+                    android:layout_height="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/tvName"
+                    android:background="@drawable/ic_view" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvName"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:hint="Padma Ahire"
+                    android:text="@{list.testName}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toTopOf="@+id/tvDsg"
+                    android:textColor="@color/black" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDsg"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@{list.testDesignation}"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </RelativeLayout>
+
+    <!--<RelativeLayout
+        android:layout_margin="4dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/_ic_rounded_rectangle_transperant">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            android:weightSum="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.4"
+                android:orientation="vertical">
+
+               &lt;!&ndash; <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv2"
+                    style="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTitle"
+                    android:fontFamily="@font/inter_regular"
+                    android:padding="4dp"
+                    android:text="Good experience overall.Proper explanation while getting loan, professional executives. "
+                    android:textColor="@color/black" />&ndash;&gt;
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDescription"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTitle"
+                    android:fontFamily="@font/inter_regular"
+                    android:hint="Good experience overall.Proper explanation while getting loan, professional executives."
+                    android:textColor="@color/black"
+                    />
+
+                <View
+                    android:layout_width="180dp"
+                    android:layout_height="3dp"
+                    android:paddingVertical="4dp"
+                    android:background="@drawable/ic_view" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvName"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:paddingTop="4dp"
+                    android:hint="Padma Ahire"
+                    android:text="@{list.testName}"
+                    android:textColor="@color/black" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvDsg"
+                    style="@style/TextAppearance.AppCompat.Caption"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_regular"
+                    android:hint="Developer"
+                    android:text="@{list.testDesignation}" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center_horizontal">
+
+                   &lt;!&ndash; <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfileImage"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/person_black_24dp"
+                        app:civ_border_color="@color/gray"
+                        app:civ_border_width="2dp" />&ndash;&gt;
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/ivProfileImage"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_centerInParent="true"
+                        app:civ_border_color="@color/transparent"
+                        app:civ_border_width="2dp"
+                        tools:src="@drawable/person_black_24dp" />
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>-->
+</layout>

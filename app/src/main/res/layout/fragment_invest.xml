@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.HomeFragment"
+    android:background="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+        <LinearLayout
+            android:id="@+id/topMenu"
+            app:layout_constraintTop_toBottomOf="@id/view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginTop="0dp"
+            android:layout_marginBottom="0dp"
+            android:paddingBottom="0dp"
+            android:paddingVertical="36dp"
+            android:weightSum="3">
+
+            <LinearLayout
+                android:id="@+id/goldRate"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:backgroundTint="#232323"
+                        android:background="@drawable/lay_circle">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_gold_rate" />
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textColor="@color/white"
+                        android:text="Gold\n Rate"
+                        android:gravity="center"
+                        android:paddingVertical="4dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginStart="0dp"
+                        android:fontFamily="@font/inter_regular"
+                        />
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/layCalculator"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:backgroundTint="#232323"
+                        android:background="@drawable/lay_circle">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_calculator" />
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Eligibility\nCalculator"
+                        android:paddingVertical="4dp"
+                        android:gravity="center"
+                        android:fontFamily="@font/inter_regular"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/cibilScore"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+
+                    <RelativeLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:backgroundTint="#232323"
+                        android:background="@drawable/lay_circle">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_cibil" />
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="CIBIL\nScore"
+                        android:paddingVertical="4dp"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/inter_regular"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/contactUs"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+
+                    <RelativeLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:gravity="center"
+                        android:backgroundTint="#232323"
+                        android:background="@drawable/lay_circle">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/ic_contact" />
+                    </RelativeLayout>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:text="Contact\nUs"
+                        android:paddingVertical="4dp"
+                        android:gravity="center_horizontal"
+                        android:fontFamily="@font/inter_regular"
+                        />
+                </LinearLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintTop_toBottomOf="@+id/topMenu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/bg_home">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="12dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    &lt;!&ndash; <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:background="@drawable/bg_card_view">&ndash;&gt;
+
+                    &lt;!&ndash;  <androidx.cardview.widget.CardView
+                        android:layout_weight="1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:cardCornerRadius="10dp"
+                      >&ndash;&gt;
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/goldLoan"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_card_view">
+
+                        <RelativeLayout
+                            android:id="@+id/card_loan"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="8dp"
+                            android:background="@drawable/lay_circle"
+                            android:backgroundTint="#F2F4F4"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_gold_loan_icon" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:paddingHorizontal="8dp"
+                            android:layout_toRightOf="@+id/card_loan">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_gold_loan"
+                                style="@style/TextAppearance.AppCompat.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+
+                                android:fontFamily="@font/inter_bold"
+                                android:text="Gold Loan"
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_sub_gold_loan"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_gold_loan"
+                                android:fontFamily="@font/inter_semibold"
+                                android:text="Instant Gold Loan at an attractive interest rate."
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/btn_gold_explore"
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_sub_gold_loan"
+                                android:fontFamily="@font/inter_regular"
+                                android:paddingVertical="4dp"
+                                android:text="Explore Now >"
+                                android:textColor="@color/primary_color" />
+
+                            <View
+                                android:id="@+id/view1"
+                                android:layout_width="80dp"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/btn_gold_explore"
+
+                                android:layout_marginTop="-4dp"
+                                android:background="@color/primary_color"
+
+                                />
+                        </RelativeLayout>
+
+
+                        &lt;!&ndash; <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_sub_gold_loan"
+                                android:layout_toRightOf="@+id/card_loan">
+&ndash;&gt;
+
+                        &lt;!&ndash;   </RelativeLayout>&ndash;&gt;
+
+
+                    </RelativeLayout>
+                    &lt;!&ndash; </androidx.cardview.widget.CardView>&ndash;&gt;
+
+                    &lt;!&ndash;</LinearLayout>&ndash;&gt;
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    &lt;!&ndash; <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:orientation="vertical"
+                         android:background="@drawable/bg_card_view">&ndash;&gt;
+
+                    &lt;!&ndash;  <androidx.cardview.widget.CardView
+                          android:layout_weight="1"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          app:cardCornerRadius="10dp"
+                        >&ndash;&gt;
+                    <RelativeLayout
+                        android:id="@+id/goldJwellery"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_card_view">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            style="@style/TextAppearance.AppCompat.Large"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="@font/inter_bold"
+                            android:text="Comming Soon!!"
+                            android:autoSizeTextType="uniform"
+                            android:textColor="@color/primary_color" />
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:id="@+id/card_jewllery"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="8dp"
+                            android:background="@drawable/lay_circle"
+                            android:backgroundTint="#F2F4F4"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_jeweller_icon" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:visibility="gone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:paddingHorizontal="8dp"
+                            android:layout_toRightOf="@+id/card_jewllery">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_jewellery_loan"
+                                style="@style/TextAppearance.AppCompat.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="Gold Jewellery"
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_sub_jwellery_loan"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_jewellery_loan"
+                                android:fontFamily="@font/inter_semibold"
+                                android:text="Latest designs of your choice from the best of the brands."
+                                android:textColor="@color/black" />
+
+                            &lt;!&ndash;  <RelativeLayout
+                              android:layout_width="wrap_content"
+                              android:layout_height="wrap_content"
+                              android:layout_below="@+id/tv_sub_jwellery_loan"
+                              android:layout_toRightOf="@+id/card_jewllery">&ndash;&gt;
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/btn_jwellery_explore"
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_sub_jwellery_loan"
+                                android:layout_marginTop="0dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:paddingVertical="4dp"
+                                android:text="Explore Now >"
+                                android:textColor="@color/primary_color" />
+
+                            <View
+                                android:id="@+id/view2"
+                                android:layout_width="80dp"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/btn_jwellery_explore"
+                                android:layout_marginTop="-4dp"
+                                android:background="@color/primary_color"
+
+                                />
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+
+                    &lt;!&ndash;     </RelativeLayout>&ndash;&gt;
+                    &lt;!&ndash; </androidx.cardview.widget.CardView>&ndash;&gt;
+
+                    &lt;!&ndash;</LinearLayout>&ndash;&gt;
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    &lt;!&ndash; <LinearLayout
+                         android:layout_width="match_parent"
+                         android:layout_height="match_parent"
+                         android:orientation="vertical"
+                         android:background="@drawable/bg_card_view">&ndash;&gt;
+
+                    &lt;!&ndash;  <androidx.cardview.widget.CardView
+                          android:layout_weight="1"
+                          android:layout_width="match_parent"
+                          android:layout_height="match_parent"
+                          app:cardCornerRadius="10dp"
+                        >&ndash;&gt;
+                    <RelativeLayout
+                        android:visibility="gone"
+                        android:id="@+id/goldInvestment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/bg_card_view">
+
+                        <RelativeLayout
+                            android:id="@+id/card_invest"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginHorizontal="8dp"
+                            android:background="@drawable/lay_circle"
+                            android:backgroundTint="#F2F4F4"
+                            android:gravity="center">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_investment_view" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:paddingHorizontal="8dp"
+                            android:layout_toRightOf="@+id/card_invest">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_invest_loan"
+                                style="@style/TextAppearance.AppCompat.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="Gold Investment"
+                                android:textColor="@color/black" />
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tv_sub_invest_loan"
+                                style="@style/TextAppearance.AppCompat.Caption"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_invest_loan"
+                                android:fontFamily="@font/inter_semibold"
+                                android:text="@string/gold_investment"
+                                android:textColor="@color/black" />
+
+                            &lt;!&ndash; <RelativeLayout
+                             android:layout_width="wrap_content"
+                             android:layout_height="wrap_content"
+                             android:layout_below="@+id/tv_sub_invest_loan"
+                             android:layout_toRightOf="@+id/card_invest">&ndash;&gt;
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/btn_invest_explore"
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tv_sub_invest_loan"
+                                android:fontFamily="@font/inter_regular"
+                                android:paddingVertical="4dp"
+                                android:text="Explore Now >"
+                                android:textColor="@color/primary_color" />
+
+                            <View
+                                android:id="@+id/view3"
+                                android:layout_width="80dp"
+                                android:layout_height="1dp"
+                                android:layout_below="@+id/btn_invest_explore"
+                                android:layout_marginTop="-4dp"
+                                android:background="@color/primary_color"
+
+                                />
+                        </RelativeLayout>
+
+
+                    </RelativeLayout>
+
+                    &lt;!&ndash; </RelativeLayout>&ndash;&gt;
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+-->
+<!--    @updated 15/04/2024-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fillViewport="true"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context="com.goglitter.ui.Invest.InvestFragment"
+        android:background="@drawable/login_bg">
+<!--    <ImageView
+        android:id="@+id/image"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/bg_down_rect"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image">-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/bg_down_rect"/>
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+           >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    >
+                    <TextView
+                        android:text="Invest with us... "
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingVertical="8dp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/black"
+                        android:visibility="visible"
+                        android:paddingHorizontal="8dp"
+                        android:autoSizeTextType="uniform"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/rvJweller"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/investor_layout"/>
+                    />
+                    <com.google.android.material.textview.MaterialTextView
+                        android:id="@+id/tvPeopleView"
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/inter_semibold"
+                        android:textColor="@color/black"
+                        android:text="What people are saying"
+                        android:autoSizeTextType="uniform"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvPeopleView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvPeopleView"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginEnd="12dp"
+                        android:orientation="horizontal"
+                        android:paddingVertical="8dp"
+                        android:paddingBottom="8dp"
+                        tools:itemCount="2"
+                        tools:listitem="@layout/cutomer_view_layout" />
+
+                </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
+
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:indeterminateTint="@color/primary_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

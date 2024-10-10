@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="list"
+            type="com.goglitter.domain.response.GlitterNotificationList" />
+    </data>
+
+    <LinearLayout
+        android:background="@drawable/btn_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="8dp">
+
+        <RelativeLayout
+            android:id="@+id/layNoti"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="4dp">
+            <ImageView
+                android:id="@+id/tvDotGray"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:visibility="gone"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:backgroundTint="@color/light_gray"
+                android:src="@drawable/selected_indicator" />
+
+            <ImageView
+                android:id="@+id/tvDot"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="4dp"
+                android:src="@drawable/selected_indicator" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/title"
+                style="@style/TextAppearance.AppCompat.Medium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/tvDot"
+                android:fontFamily="@font/inter_semibold"
+                android:paddingHorizontal="8dp"
+                android:text="@{list.title}"
+                tools:text="title" />
+
+          <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDesc"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/title"
+                android:layout_toRightOf="@+id/tvDot"
+                android:fontFamily="@font/inter_regular"
+                android:paddingHorizontal="8dp"
+                android:text="@{list.message}"
+                tools:text="title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvDate"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDesc"
+                android:layout_toRightOf="@+id/tvDot"
+                android:fontFamily="@font/inter_regular"
+                android:paddingHorizontal="8dp"
+                tools:text="title" />
+        </RelativeLayout>
+    </LinearLayout>
+</layout>

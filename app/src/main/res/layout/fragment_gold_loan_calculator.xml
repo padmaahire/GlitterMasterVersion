@@ -1,0 +1,669 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/calculator_fragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="com.goglitter.ui.GoldLoanCalculator.GoldLoanCalculatorFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="98dp"
+                    android:background="@drawable/bg_down_rect">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="0dp"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvText"
+                            style="@style/TextAppearance.AppCompat.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="13dp"
+                            android:text="Finding In"
+                            android:textColor="@color/white" />
+
+                        <Spinner
+                            android:id="@+id/tvCity"
+                            style="@style/Widget.AppCompat.Spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/tvText"
+                            android:backgroundTint="@color/white"
+                            android:dropDownWidth="250dp"
+                            android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+                            android:paddingRight="0dp"
+                            android:popupBackground="@android:color/white"
+                            android:popupElevation="1dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+                    </RelativeLayout>
+
+
+                    <!--  <Spinner
+                          android:id="@+id/tvCity"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_centerHorizontal="true"
+                          android:layout_marginStart="16dp"
+                          android:layout_marginEnd="16dp"
+                          android:layout_marginBottom="16dp"
+                          android:layout_toRightOf="@+id/tvText"
+                          android:background="@drawable/spinner_bg"
+
+                          />
+                  -->
+
+
+                </RelativeLayout>
+
+                <com.smarteist.autoimageslider.SliderView
+                    android:id="@+id/slider"
+                    android:layout_width="match_parent"
+                    android:layout_height="180dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="-70dp"
+                    android:layout_marginEnd="16dp"
+                    app:sliderAnimationDuration="600"
+                    app:sliderAutoCycleDirection="back_and_forth"
+                    app:sliderIndicatorAnimationDuration="600"
+                    app:sliderIndicatorEnabled="true"
+                    app:sliderIndicatorGravity="center_horizontal|bottom"
+                    app:sliderIndicatorMargin="15dp"
+                    app:sliderIndicatorOrientation="horizontal"
+                    app:sliderIndicatorPadding="2dp"
+                    app:sliderIndicatorRadius="1.2dp"
+                    app:sliderIndicatorSelectedColor="#5A5A5A"
+                    app:sliderIndicatorUnselectedColor="@color/gray"
+                    app:sliderScrollTimeInSec="1"
+                    app:sliderStartAutoCycle="true" />
+
+                <!--   <com.smarteist.autoimageslider.SliderView
+                       android:layout_marginStart="24dp"
+                       android:layout_marginEnd="24dp"
+                       android:layout_marginBottom="10dp"
+                       android:layout_marginTop="-50dp"
+                       android:id="@+id/slider"
+                       android:layout_width="match_parent"
+                       android:layout_height="200dp"
+                       android:layout_centerInParent="true"
+                       app:sliderAnimationDuration="600"
+                       app:sliderAutoCycleDirection="back_and_forth"
+                       app:sliderIndicatorAnimationDuration="600"
+                       app:sliderIndicatorEnabled="true"
+                       app:sliderIndicatorGravity="center_horizontal|bottom"
+                       app:sliderIndicatorMargin="15dp"
+                       app:sliderIndicatorOrientation="horizontal"
+                       app:sliderIndicatorPadding="3dp"
+                       app:sliderIndicatorRadius="2dp"
+                       app:sliderIndicatorSelectedColor="#5A5A5A"
+                       app:sliderIndicatorUnselectedColor="@color/gray"
+                       app:sliderScrollTimeInSec="1" />-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:background="@drawable/_ic_rounded_rectangle_transperant"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.4"
+                            android:orientation="vertical"
+                            android:paddingLeft="4dp">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center">
+
+                                <TextView
+                                    android:id="@+id/tv1"
+                                    style="@style/TextAppearance.AppCompat.Medium"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:autoSizeTextType="uniform"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:text="Gold Loan"
+                                    android:textColor="@color/black" />
+
+                                <TextView
+                                    android:id="@+id/tv2"
+                                    style="@style/TextAppearance.AppCompat.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/tv1"
+                                    android:text="Avail maximum loan value of your gold at lowest interest rate " />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.6"
+                            android:orientation="vertical">
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <androidx.appcompat.widget.AppCompatButton
+                                    android:id="@+id/btnLoanApply"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_centerInParent="true"
+                                    android:background="@drawable/btn_apply_small"
+                                    android:fontFamily="@font/inter_medium"
+                                    android:paddingLeft="10dp"
+                                    android:paddingRight="10dp"
+                                    android:text="Apply Now"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/white" />
+                            </RelativeLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_loan_cal">
+
+                    <ScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintTop_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="4dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="8dp"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toBottomOf="parent"
+                            app:layout_constraintTop_toTopOf="parent">
+
+                            <com.google.android.material.textview.MaterialTextView
+                                android:id="@+id/tvTitle"
+                                style="@style/TextAppearance.AppCompat.Medium"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="8dp"
+                                android:autoSizeTextType="uniform"
+                                android:fontFamily="@font/inter_semibold"
+                                android:padding="8dp"
+                                android:text="Loan Eligibility Calculator"
+                                android:textColor="@color/black" />
+
+                            <androidx.cardview.widget.CardView
+                                android:id="@+id/card"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@+id/tvTitle"
+                                android:background="@color/white"
+                                app:cardCornerRadius="10dp"
+                                app:cardElevation="2dp"
+                                app:cardUseCompatPadding="true">
+
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_margin="16dp"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:id="@+id/layLoanAmount"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="8dp"
+                                        android:weightSum="1">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5"
+                                            android:orientation="vertical">
+
+                                            <com.google.android.material.textview.MaterialTextView
+                                                android:id="@+id/tvCaratTitle"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/tvsubTitle"
+                                                android:layout_alignParentStart="true"
+                                                android:autoSizeTextType="uniform"
+                                                android:fontFamily="@font/inter_semibold"
+                                                android:padding="8dp"
+                                                android:text="Loan Amount(Rs.)"
+                                                android:textColor="@color/black" />
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5"
+                                            android:orientation="vertical">
+
+                                            <EditText
+                                                android:id="@+id/tvLoanValue"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/tvsubTitle"
+                                                android:layout_alignParentEnd="false"
+                                                android:layout_toRightOf="@+id/tvCaratTitle"
+                                                android:autoSizeTextType="uniform"
+                                                android:background="@drawable/_ic_rounded_rectangle_transperant"
+                                                android:fontFamily="@font/inter_bold"
+                                                android:hint="0"
+                                                android:maxLength="7"
+                                                android:inputType="number"
+                                                android:padding="8dp"
+                                                android:textColor="@color/medium_orange" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+
+                                    <TextView
+                                        android:id="@+id/tvLoanError1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Please enter amount in between 50K to 50L"
+                                        android:textColor="@color/red"
+                                        android:layout_marginStart="16dp"
+                                        android:visibility="gone" />
+
+                                    <SeekBar
+                                        android:id="@+id/amountSeekBar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_below="@+id/layLoanAmount"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:max="5000000"
+                                        android:maxHeight="5dp"
+                                        android:min="50000"
+                                        android:minHeight="5dp"
+                                        android:progressDrawable="@drawable/seekbar_style"
+                                        android:thumb="@drawable/ic_seekbar"
+                                        tools:progress="100000" />
+
+                                    <TextView
+                                        android:visibility="gone"
+                                        android:id="@+id/label1"
+                                        style="@style/TextAppearance.AppCompat.Small"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/amountSeekBar"
+                                        android:autoSizeTextType="uniform"
+                                        android:padding="4dp"
+                                        android:text="Enter amount in between 1L to 50L"
+                                        android:textColor="@color/primary_color" />
+
+                                    <LinearLayout
+                                        android:id="@+id/layLoanInterest"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/label1"
+                                        android:layout_margin="8dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="1">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5"
+                                            android:orientation="vertical">
+
+                                            <com.google.android.material.textview.MaterialTextView
+                                                android:id="@+id/tvCaratWt"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/label1"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_weight="0.1"
+                                                android:autoSizeTextType="uniform"
+                                                android:fontFamily="@font/inter_semibold"
+                                                android:padding="8dp"
+                                                android:text="Interest Rate(%)"
+                                                android:textColor="@color/black" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5"
+                                            android:orientation="vertical">
+
+                                            <EditText
+                                                android:id="@+id/tvInterestRate"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/label1"
+                                                android:layout_alignParentEnd="false"
+                                                android:layout_toRightOf="@+id/tvCaratWt"
+                                                android:layout_weight="0.9"
+                                                android:background="@drawable/btn_bg"
+                                                android:fontFamily="@font/inter_bold"
+                                                android:hint="0.0"
+                                                android:maxLength="4"
+                                                android:inputType="numberDecimal"
+                                                android:padding="8dp"
+                                                android:textColor="@color/medium_orange" />
+                                        </LinearLayout>
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/tvInterestError"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Please enter interest rate in between 5% to 25%"
+                                        android:textColor="@color/red"
+                                        android:layout_marginStart="16dp"
+                                        android:visibility="gone" />
+
+                                    <SeekBar
+                                        android:id="@+id/interestSeekbar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/layLoanInterest"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:maxHeight="5dp"
+                                        android:minHeight="10dp"
+                                        android:max="250"
+                                        android:min="50"
+                                        android:progressDrawable="@drawable/seekbar_style"
+                                        android:thumb="@drawable/ic_seekbar"
+                                         />
+
+                                    <TextView
+                                        android:visibility="gone"
+                                        android:id="@+id/label2"
+                                        style="@style/TextAppearance.AppCompat.Small"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/interestSeekbar"
+                                        android:autoSizeTextType="uniform"
+                                        android:padding="4dp"
+                                        android:text="Enter rate in between 5% to 25%"
+                                        android:textColor="@color/primary_color" />
+
+                                    <LinearLayout
+                                        android:id="@+id/layLoanTenure"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/label3"
+                                        android:layout_margin="8dp"
+                                        android:orientation="horizontal"
+                                        android:weightSum="1">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5"
+                                            android:orientation="vertical">
+
+                                            <com.google.android.material.textview.MaterialTextView
+                                                android:id="@+id/tvLoanTenure"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/label2"
+                                                android:layout_alignParentStart="true"
+                                                android:layout_weight="0.1"
+                                                android:autoSizeTextType="uniform"
+                                                android:fontFamily="@font/inter_semibold"
+                                                android:padding="8dp"
+                                                android:text="Loan Tenure(month)"
+                                                android:textColor="@color/black" />
+
+                                        </LinearLayout>
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="0.5"
+                                            android:orientation="vertical">
+
+                                            <EditText
+                                                android:id="@+id/tvYear"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_below="@+id/label2"
+                                                android:layout_alignParentEnd="false"
+                                                android:layout_toRightOf="@+id/tvLoanTenure"
+                                                android:layout_weight="0.9"
+                                                android:autoSizeTextType="uniform"
+                                                android:background="@drawable/btn_bg"
+                                                android:fontFamily="@font/inter_bold"
+                                                android:hint="0"
+                                                android:maxLength="3"
+                                                android:inputType="number"
+                                                android:padding="8dp"
+                                                android:textColor="@color/medium_orange" />
+                                        </LinearLayout>
+
+
+                                    </LinearLayout>
+
+                                    <TextView
+                                        android:id="@+id/tvTenureError"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:text="Please enter tenure in between 12 months to 120 months"
+                                        android:textColor="@color/red"
+                                        android:visibility="gone"
+                                        android:layout_marginStart="16dp"/>
+
+                                    <SeekBar
+                                        android:id="@+id/tenureSeekbar"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/layLoanTenure"
+                                        android:layout_marginTop="8dp"
+                                        android:layout_marginBottom="8dp"
+                                        android:max="120"
+                                        android:maxHeight="5dp"
+                                        android:min="12"
+                                        android:minHeight="10dp"
+                                        android:progress="1"
+                                        android:progressDrawable="@drawable/seekbar_style"
+                                        android:thumb="@drawable/ic_seekbar" />
+
+                                    <TextView
+                                        android:visibility="gone"
+                                        android:id="@+id/label3"
+                                        style="@style/TextAppearance.AppCompat.Small"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@id/tenureSeekbar"
+                                        android:autoSizeTextType="uniform"
+                                        android:padding="4dp"
+                                        android:text="Enter tenure in between 1 year to 10 year"
+                                        android:textColor="@color/primary_color" />
+
+                                    <androidx.cardview.widget.CardView
+                                        android:id="@+id/cardCal"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/label3"
+                                        android:layout_marginTop="8dp"
+                                        android:backgroundTint="#F4F6F6"
+                                        app:cardCornerRadius="10dp"
+                                        app:cardElevation="2dp"
+                                        app:cardUseCompatPadding="true">
+
+                                        <LinearLayout
+                                            android:layout_width="match_parent"
+                                            android:layout_height="match_parent"
+                                            android:layout_margin="16dp"
+                                            android:orientation="vertical">
+
+                                            <com.google.android.material.textview.MaterialTextView
+                                                android:id="@+id/tvLoanLabel"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:autoSizeTextType="uniform"
+                                                android:fontFamily="@font/inter_semibold"
+                                                android:text="Eligible EMI per Month"
+                                                android:textColor="@color/bg_circle" />
+
+                                            <RelativeLayout
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_horizontal">
+
+                                                <com.google.android.material.textview.MaterialTextView
+                                                    android:id="@+id/tvLoanAmount"
+                                                    style="@style/TextAppearance.AppCompat.Medium"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:fontFamily="@font/inter_bold"
+                                                    android:hint="0.0"
+                                                    android:padding="0dp"
+                                                    android:textColor="@color/medium_orange" />
+
+                                                <com.google.android.material.textview.MaterialTextView
+                                                    android:id="@+id/tvLoanAmountstar"
+                                                    style="@style/TextAppearance.AppCompat.Medium"
+                                                    android:layout_width="wrap_content"
+                                                    android:layout_height="wrap_content"
+                                                    android:layout_gravity="center"
+                                                    android:layout_marginTop="-1dp"
+                                                    android:layout_toRightOf="@+id/tvLoanAmount"
+                                                    android:autoSizeTextType="uniform"
+                                                    android:fontFamily="@font/inter_bold"
+                                                    android:text="*"
+                                                    android:textColor="@color/medium_orange"
+                                                    android:textSize="12dp"
+                                                    android:visibility="gone" />
+                                            </RelativeLayout>
+
+                                            <!--   <com.google.android.material.textview.MaterialTextView
+                                                      android:id="@+id/tvLoanAmount"
+                                                      style="@style/TextAppearance.AppCompat.Medium"
+                                                      android:layout_width="wrap_content"
+                                                      android:layout_height="wrap_content"
+                                                      android:layout_gravity="center"
+                                                      android:fontFamily="@font/inter_bold"
+                                                     android:text="0.0"
+                                                      android:padding="0dp"
+                                                      android:textColor="@color/primary_color" />-->
+                                            -->
+
+                                            <com.google.android.material.textview.MaterialTextView
+                                                android:id="@+id/tvAmountlabel"
+                                                style="@style/TextAppearance.AppCompat.Small"
+                                                android:layout_width="wrap_content"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center"
+                                                android:fontFamily="@font/inter_regular"
+                                                android:hint="As per price on 02 Dec 2022"
+                                                android:textColor="@color/gray"
+                                                android:visibility="visible" />
+
+                                        </LinearLayout>
+                                    </androidx.cardview.widget.CardView>
+
+
+                                    <androidx.appcompat.widget.AppCompatButton
+                                        android:id="@+id/btnLoanApplybtn"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_below="@+id/cardCal"
+                                        android:layout_alignParentEnd="true"
+                                        android:layout_alignParentBottom="true"
+                                        android:layout_centerInParent="true"
+                                        android:layout_marginTop="16dp"
+                                        android:background="@drawable/btn_apply"
+                                        android:fontFamily="@font/inter_medium"
+                                        android:text="Apply Now"
+                                        android:layout_marginStart="8dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:textAllCaps="false"
+                                        android:textColor="@color/white" />
+
+
+                                </LinearLayout>
+
+                            </androidx.cardview.widget.CardView>
+
+
+                        </LinearLayout>
+                    </ScrollView>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <ProgressBar
+                    android:id="@+id/progress_circular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:indeterminateTint="@color/gray"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+            </LinearLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

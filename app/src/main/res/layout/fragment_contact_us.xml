@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    android:background="@drawable/login_bg"
+    android:id="@+id/contactUsFragment"
+    tools:context="com.goglitter.ui.DrawerMenu.ContactUsFragment">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+         >
+            <ImageView
+                android:id="@+id/lay_black"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:visibility="visible"
+                android:background="@drawable/bg_down_rect"/>
+
+            <com.smarteist.autoimageslider.SliderView
+                android:visibility="gone"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="-70dp"
+                android:id="@+id/slider"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_centerInParent="true"
+                app:sliderAnimationDuration="600"
+                app:sliderAutoCycleDirection="back_and_forth"
+                app:sliderIndicatorAnimationDuration="600"
+                app:sliderIndicatorEnabled="true"
+                app:sliderIndicatorGravity="center_horizontal|bottom"
+                app:sliderIndicatorMargin="15dp"
+                app:sliderIndicatorOrientation="horizontal"
+                app:sliderIndicatorPadding="2dp"
+                app:sliderIndicatorRadius="1.2dp"
+                app:sliderIndicatorSelectedColor="#5A5A5A"
+                app:sliderIndicatorUnselectedColor="@color/gray"
+                app:sliderScrollTimeInSec="1"
+                app:sliderStartAutoCycle="true"/>
+            <!--   <RelativeLayout
+                   android:id="@+id/banner"
+                   android:layout_width="match_parent"
+                   android:layout_height="150dp"
+                   android:layout_below="@+id/lay_black"
+                   android:layout_marginStart="30dp"
+                   android:layout_marginEnd="30dp"
+                   android:layout_marginTop="-70dp"
+                   app:layout_constraintTop_toBottomOf="@id/lay_black">
+
+                   <ImageView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:src="@drawable/banner_jwellery"
+                       android:scaleType="fitXY" />
+
+               </RelativeLayout>-->
+
+            <LinearLayout
+                    android:layout_marginTop="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    >
+                   <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Large"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="4dp"
+                       android:autoSizeTextType="uniform"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Get in touch"/>
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvContact"
+                    style="@style/TextAppearance.AppCompat.Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:padding="0dp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_marginTop="8dp"
+                    android:textSize="12sp"
+                    android:textColorHighlight="@color/white"
+                    android:textColorLink="@color/primary_color"
+                    android:fontFamily="@font/inter_regular"
+                    android:text="@string/Get_in_Touch"/>
+
+                <!--    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:padding="4dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:fontFamily="@font/inter_bold"
+                        android:text="Reach us for any query/complaint or feedback at: goglitter@glitter-india.com"/>-->
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="First Name"
+                        android:autoSizeTextType="uniform"/>
+
+                    <EditText
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:id="@+id/edtName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:inputType="textPersonName"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:hint="Enter Name"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"/>
+                <TextView
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:id="@+id/tvErrName"
+                    android:visibility="gone"
+                    android:paddingVertical="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"/>
+
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Last Name"
+                        android:autoSizeTextType="uniform"/>
+                    <EditText
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:id="@+id/edtLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:inputType="textPersonName"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:hint="Enter Last Name"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"/>
+                    <TextView
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:id="@+id/tvErrLastName"
+                        android:visibility="gone"
+                        android:paddingVertical="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Phone Number" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btn_bg"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:weightSum="1">
+
+                            <com.hbb20.CountryCodePicker
+                                android:layout_gravity="center"
+                                android:id="@+id/ccp"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.1"
+                                app:ccp_showFlag="false"
+                                app:ccp_clickable="false"
+                                app:ccp_defaultNameCode="IN"
+                                app:ccp_showNameCode="false"/>
+                            <View
+                                android:layout_width="1dp"
+                                android:layout_height="36dp"
+                                android:layout_marginTop="8dp"
+                                android:layout_marginBottom="8dp"
+                                android:background="@color/gray"
+
+                                />
+                            <EditText
+                                style="@style/TextAppearance.AppCompat.Medium"
+                                android:id="@+id/edtPhoneNumber"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.9"
+                                android:padding="4dp"
+                                android:inputType="phone"
+                                android:maxLength="10"
+                                android:autoSizeTextType="uniform"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="@font/inter_regular"
+                                android:hint="Enter Mobile Number"
+                                android:background="@drawable/flag_transparent"/>
+
+                        </LinearLayout>
+                    </RelativeLayout>
+                <TextView
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:id="@+id/tvErrPhone"
+                    android:visibility="gone"
+                    android:paddingVertical="4dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/red"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Email Address"
+                        android:autoSizeTextType="uniform"/>
+
+                    <EditText
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:id="@+id/edtEmailId"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="16dp"
+                        android:inputType="textEmailAddress"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:hint="Enter Email Address"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"/>
+
+                    <TextView
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:id="@+id/tvErrEmail"
+                        android:visibility="gone"
+                        android:paddingVertical="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"/>
+                    <com.google.android.material.textview.MaterialTextView
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/inter_regular"
+                        android:layout_marginTop="16dp"
+                        android:textColor="@color/black"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:text="Message"
+                        android:autoSizeTextType="uniform"/>
+
+                    <EditText
+                        style="@style/TextAppearance.AppCompat.Medium"
+                        android:id="@+id/edtMessage"
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:padding="16dp"
+                        android:gravity="start"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:inputType="textMultiLine"
+                        android:hint="Enter Message..."
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"/>
+
+                    <TextView
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:id="@+id/tvErrMessage"
+                        android:visibility="gone"
+                        android:paddingVertical="4dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/red"/>
+
+                    <RelativeLayout
+
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginStart="16dp">
+                        <androidx.appcompat.widget.AppCompatCheckBox
+                            android:id="@+id/checkbox"
+                            android:visibility="gone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:button="@drawable/cb_selector"/>
+                        <com.google.android.material.textview.MaterialTextView
+                            android:layout_toRightOf="@+id/checkbox"
+                            android:id="@+id/tvPrivacy"
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="4dp"
+                            android:autoSizeTextType="uniform"
+                            android:textColorHighlight="@color/white"
+                            android:textColorLink="@color/primary_color"
+                            android:fontFamily="@font/inter_regular"
+                            tools:text="I agree that by clicking on 'Submit', I authorise GoGlitter and its representatives to contact me by telephone, e-mail, using Short Messaging Service (SMS) with respect to products/ facilities hereby applied for.">
+
+                        </com.google.android.material.textview.MaterialTextView>
+
+
+
+                    </RelativeLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnSubmit"
+                        android:background="@drawable/button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Submit"
+                        android:padding="4dp"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/inter_medium"
+                        android:gravity="center"
+                        android:textColor="@color/white"
+                        />
+
+                </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/primary_color"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

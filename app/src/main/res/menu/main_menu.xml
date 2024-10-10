@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/home_selector"
+        android:title="@string/menu_home" />
+    <item
+        android:id="@+id/nav_loan"
+        android:icon="@drawable/loan_selector"
+        android:title="@string/menu_loan" />
+
+    <item
+        android:id="@+id/nav_jwellery"
+        android:icon="@drawable/jwellery_selector"
+        android:title="@string/menu_jwellary" />
+
+    <item
+        android:id="@+id/nav_invest"
+        android:icon="@drawable/invest_selector"
+        android:title="@string/menu_invest" />
+
+    <item
+        android:id="@+id/nav_account"
+        android:icon="@drawable/account_selector"
+        android:title="@string/menu_account" />
+</menu>

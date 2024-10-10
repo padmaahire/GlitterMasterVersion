@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "949763021658",
+    "project_id": "goglitterandroid",
+    "storage_bucket": "goglitterandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:949763021658:android:3e836655e258f4d4167163",
+        "android_client_info": {
+          "package_name": "com.goglitter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDF6r180sCT0UAzm_DeMQN4e6ihxNveVgM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,61 @@
+<resources>
+    <string name="app_name">Go Glitter</string>
+    <string name="ok">Ok</string>
+    <string name="menu_home">Home</string>
+    <string name="menu_loan">Gold Loan</string>
+    <string name="menu_jwellary">Sell Gold</string>
+    <string name="menu_invest">Invest</string>
+    <string name="menu_account">Account</string>
+    <string name="privacy_text">By logging in or registering, you agree to our Terms of Services and Privacy Policy </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Rs">\u20B9</string>
+    <string name="Indicative_Gold_Rate">*Indicative Gold Rate</string>
+    <!--<string name="Rate_disclaimer"> *Source of Gold Rate: https://metalpriceapi.com/</string>-->
+    <string name="Rate_disclaimer"> *Source of Gold Rate: https://gold-rates-india.p.rapidapi.com/</string>
+    <string name="application_declaration"> I agree that by clicking on \'Submit\', I authorise GoGlitter and its representatives to contact me by telephone, e-mail, using Short Messaging Service (SMS) with respect to products/ facilities hereby applied for.</string>
+    <string name="Get_in_Touch">Reach us for any query/complaint or feedback at: support@glitter-india.com</string>
+
+    <string name="error_mobile">"Mobile number is mandatory."</string>
+    <string name="error_name">"First name is mandatory."</string>
+    <string name="error_last_name">"Last name is mandatory."</string>
+    <string name="error_email">"Email Id is mandatory."</string>
+    <string name="error_pincode">"Pin code is mandatory."</string>
+    <string name="error_msg">"Please enter your query here."</string>
+    <string name="about_msg1">"We specialise in gold loans, gold investments, and a stunning collection of gold jewellery from reputed brands. Whether you need financial assistance, desire exquisite jewellery for every occasion, or seek diverse investment options, we are a one-stop solution for you."</string>
+    <string name="about_msg2">"As a trusted platform, we offer gold loans to individuals in need of immediate finance. Our seamless process ensures quick access to funds, providing a convenient solution for gold owners seeking financial assistance."</string>
+    <string name="about_msg3">"Explore our extensive collection of branded gold jewellery, featuring options for bridal wear, daily wear, and fashion wear. We bring you the latest designs and trends to help you make a statement with your personal style."</string>
+    <string name="about_msg4">"We also offer multiple financial investment options. From recurring deposits (RD) and gold mutual funds to gold sovereign bonds and digital gold, we offer a diverse range of investment avenues to suit your financial goals and preferences."</string>
+    <string name="about_msg5">"At GoGlitter, we aim to be your trusted partner in all your gold-related needs. Visit us today and experience the convenience of our comprehensive marketplace, where you can access loans,invest wisely, and discover stunning gold jewellery-all in one place. "</string>
+    <string name="gold_investment">"Mutual Fund, ETF, Digital Gold, Sovereign Bonds, &amp; RD."</string>
+    <string name="privateKey">Proc-Type: 4,ENCRYPTED
+DEK-Info: DES-EDE3-CBC,E502795EEEB9B882
+
+kFkpKKK51TuC1cWPyFpDcXnRAMsOWxwIuYnSwf74TC01AJy7V2FOuMxT7+PMlN5o
+YC53uXL/tWJi7WU0N0UrWWaiUUw8oSTVqZlqnFD65Qakxwdn4LNED4GUBWd/Sanr
+DxxmBLJCLrIVNgKflmRhHYGs8Xaox/Wi6hwJ64NvLh7UctCfEHHvAC0OALvT7ffj
+m9kH0QV/K72VJ85qBXT8W3wbROKvZNPkVrHuo5RtSZBcp2vT+7U0C4FeT+lzPfZ8
+INbOBxeM86n1nBpcr1O+0RYZrJO7izDn9YJPPg7orqXtuNGeFTmfqYkkSZRnlJPy
+cq9UFK4wlv8D1C6VJKHZAtbRJwM3RwoifCNWZZ9QvpJOUT6I3xPJPK4KE1r/TGJg
+xB3L1fGIZWI7vzPNV4yv54LvjB80sisNTUvL/IpAsH9GgGklwCaBy3buwxxX6hbY
+3KuSfQ2xMxVYSIPk2unMYqCB2C/JBd58AyIMl54D75gEfogGmJ7bXrrQyRGeZcJa
+SzJMjSHpmypfhPEiVb4QztXHXWtBj/oJL8iExxJQM3tUep3uZwwXQod80mPSSS74
+u0zKE2tjePTklHguBG/VvmG1rKsrXEIoBX/PfHcojuj84Z5fapPhZzqf//J+qHk9
+lOToLBLhEraOuVPJl6E06XPtReerRBRToBCX0+tP+b0F7ag0LntJzA0n/udqGNNC
+yBJstv7YDLMDPdaKt9VQZeYSMmleGZ45AIvXAoMZO0NgoolL18+kZ/4r33TXiG+w
+BAil/MmyVpi4/Mu1JhyEAjaTHc+aslxENAfkImfcwMOppD4GNigrNQ1ejrdM3Vhw
+bh943TX2ebsJFIcxP/l9rzDRkcqVPg+9vVvdD+txyyYYX4TBqE3tw1EPsWjf0G/p
+kJPKOj9aRtGXJ0n+SfAOrVwtH+MgstUEQ/RLNf+esnXsZFgbdWJn1X/Z+B6kW07i
+oIcLIH1CTscuuIhLhhZH6L/oQkMQAEbDyZvD8nHPvbGvcgE4pEoWJ52wNFLfoGTt
+weS6isC2sYPwmzikvVJ9ldoYm3lujM6/3PWplZpxeIZjcugfoojhA0uvnaSWU9me
+7YpJHcKNDd7c4UyAsWdL5A0xuvVix5X9Qp9oDWfMaFPLxSKIPA/eqWRkvj2ebU/X
+y0qsCQRAXsmdch43/BJU/+UwuuztpQGsTAltq8Gae5j1kWi8TLY0WuEOPf6FFzDu
+u8iWOQ6Fv9T2e0Em+6y2yxEvg0jOzSo5c6u7YpBJnH9XMxq6w59s1UP7xASBEUtG
+3pXhMTJklz1dIQPKT4oZe9bMU45UrfxW+8dcBxR/931V8Tv2BOzYL0Xyy13W1o4f
+mYHqeeWyHIsruHw+sJMPWx8HJF+dffDQVFsTTD40LkjGOA4mgHh0l31Ae2C3kltu
+mQqwn4yzED+CnrOIlZgjn/Xmr3QdKOfEvEbPLGsTqZe4MWEBgennXKiC7La9iY/e
+gCauQ36Ct3C3jMQ7lu8Umx9nedlsDykOG3QJrMaOlKDF0yctjbbpRE+dTpvi2pwE
+O6OWraVXhSGolDqt5AQpUFY5llwAVyQ5Guqzvvn/qZuGemIu9vi8kVo2h7eXr/vb</string>
+
+
+</resources>

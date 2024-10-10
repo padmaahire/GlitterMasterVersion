@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.goglitter.ui.Account.AccountFragment"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:background="@drawable/bg_down_rect">
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="0.1dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfileImage"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:padding="10dp"
+                android:layout_centerVertical="true"
+                android:paddingStart="24dp"
+                android:src="@drawable/ic_profile_img"
+                app:civ_border_color="@color/gray"
+                app:civ_border_width="2dp" />
+            <TextView
+                android:layout_toRightOf="@+id/ivProfileImage"
+                android:id="@+id/tvUserName"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:autoSizeTextType="uniform"
+                android:fontFamily="@font/inter_semibold"
+                android:includeFontPadding="false"
+                android:padding="8dp"
+                android:singleLine="true"
+                tools:text="Padma Ahire"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/white" />
+
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/profileLay"
+            android:layout_marginTop="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
+
+            <TextView
+                android:id="@+id/tvMyProfile"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/arrow"
+                android:autoSizeTextType="uniform"
+                android:drawableLeft="@drawable/ic_profile_img"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:lines="1"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                tools:text="My Profile"
+                android:text="My Profile"/>
+            <ImageView
+                android:id="@+id/arrow"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_forword_arrow"
+                app:tint="@color/gray" />
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/arrow"
+                android:layout_marginTop="8dp"
+                android:background="@color/light_gray" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/enquiryLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
+
+            <TextView
+                android:id="@+id/tvMyEnquiry"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/enquiryArrow"
+                android:autoSizeTextType="uniform"
+                android:drawableLeft="@drawable/ic_enquiry"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:lines="1"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                tools:text="My Enquiry"
+                android:text="My Enquiry"/>
+            <ImageView
+                android:id="@+id/enquiryArrow"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_forword_arrow"
+                app:tint="@color/gray" />
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@+id/enquiryArrow"
+                android:layout_marginTop="8dp"
+                android:background="@color/light_gray" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/logoutLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
+
+            <TextView
+                android:id="@+id/tvLogout"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/logoutArrow"
+                android:autoSizeTextType="uniform"
+                android:drawableLeft="@drawable/ic_logout"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:lines="1"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                tools:text="Logout"
+                android:text="Logout"/>
+            <ImageView
+                android:id="@+id/logoutArrow"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_forword_arrow"
+                app:tint="@color/gray" />
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="visible"
+                android:layout_below="@+id/logoutArrow"
+                android:layout_marginTop="8dp"
+                android:background="@color/light_gray" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/deleteLay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
+
+            <TextView
+                android:id="@+id/tvDelete"
+                style="@style/TextAppearance.AppCompat.Small"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/deleteArrow"
+                android:autoSizeTextType="uniform"
+                android:drawableLeft="@drawable/ic_delete"
+                android:drawablePadding="16dp"
+                android:fontFamily="@font/inter_regular"
+                android:lines="1"
+                android:singleLine="true"
+                android:textColor="@color/black"
+                tools:text="Delete"
+                android:text="Delete Account"/>
+            <ImageView
+                android:id="@+id/deleteArrow"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:src="@drawable/ic_forword_arrow"
+                app:tint="@color/gray" />
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:visibility="gone"
+                android:layout_below="@+id/deleteArrow"
+                android:layout_marginTop="8dp"
+                android:background="@color/light_gray" />
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminateTint="@color/primary_color"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+
+      <!--<RelativeLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintTop_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="-28dp">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/bg_down_rect"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvUserDetails"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="2dp"
+            app:cardUseCompatPadding="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:orientation="vertical">
+
+
+                <RelativeLayout
+                    android:id="@+id/layImage"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerInParent="true"
+                    android:layout_gravity="center_horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/ivProfileImage"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp"
+                            android:layout_centerInParent="true"
+                            android:src="@drawable/person_black_24dp"
+                            app:civ_border_color="@color/gray"
+                            app:civ_border_width="2dp" />
+                    </RelativeLayout>
+
+
+                    <ProgressBar
+                        android:id="@+id/progress_bar"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true"
+                        android:visibility="gone" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layImage"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"
+                        android:drawableLeft="@drawable/person_black_24dp"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:lines="1"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="8dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        tools:text="Name" />
+
+                    <TextView
+                        android:id="@+id/tvUserMobile"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"
+                        android:drawableLeft="@drawable/ic_phone"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:lines="1"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="8dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        tools:text="Mobile" />
+
+                    <TextView
+                        android:id="@+id/tvUserEmail"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"
+                        android:drawableLeft="@drawable/ic_email"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:lines="1"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="8dp"
+                        android:singleLine="true"
+                        android:textColor="@color/black"
+                        tools:text="Email ID" />
+
+                    <TextView
+                        android:id="@+id/tvChangePassword"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/btn_bg"
+                        android:drawableLeft="@drawable/ic_password"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:lines="1"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="8dp"
+                        android:singleLine="true"
+                        android:text="Change Password"
+                        android:textColor="@color/black"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvUserLogout"
+                        style="@style/TextAppearance.AppCompat.Small"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:autoSizeTextType="uniform"
+                        android:background="@drawable/btn_bg"
+                        android:drawableLeft="@drawable/ic_logout"
+                        android:drawablePadding="16dp"
+                        android:fontFamily="@font/inter_regular"
+                        android:lines="1"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="8dp"
+                        android:singleLine="true"
+                        android:text="Logout"
+                        android:textColor="@color/black" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>-->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

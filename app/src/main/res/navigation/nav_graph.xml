@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.goglitter.ui.Home.HomeFragment"
+        android:label="Home"
+        tools:layout="@layout/fragment_home" >
+       <action
+            android:id="@+id/action_nav_home_to_nav_loan"
+            app:destination="@id/nav_loan"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_home"
+            />
+        <action
+            android:id="@+id/action_nav_home_to_nav_jwellery"
+            app:destination="@id/nav_jwellery"
+            app:popUpToInclusive="true"
+            app:popUpTo="@id/nav_home"/>
+        <action
+            android:id="@+id/action_nav_home_to_nav_invest"
+            app:destination="@id/nav_invest"
+            app:popUpToInclusive="false"
+            app:popUpTo="@id/nav_home"/>
+        <action
+            android:id="@+id/action_nav_home_to_goldLoanCalculatorFragment"
+            app:destination="@id/goldLoanCalculatorFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_contactUsFragment"
+            app:destination="@id/contactUsFragment" />
+        <action
+            android:id="@+id/action_nav_home_to_glitterRateFragment"
+            app:destination="@id/glitterRateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_loan"
+        android:name="com.goglitter.ui.Loan.LoanFragment"
+        android:label="fragment_loan"
+        tools:layout="@layout/fragment_loan" >
+        <action
+            android:id="@+id/action_nav_loan_to_nav_loanApplicationFragment"
+            app:destination="@id/nav_loanApplicationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_jwellery"
+        android:name="com.goglitter.ui.Jewellery.JwellaryFragment"
+        android:label="fragment_jwellary"
+        tools:layout="@layout/fragment_jwellary" >
+        <action
+            android:id="@+id/action_nav_jwellery_to_jwelleryDialogSheetFragment"
+            app:destination="@id/jwelleryDialogSheetFragment" />
+        <action
+            android:id="@+id/action_nav_jwellery_to_jewelleryApplicationFragment"
+            app:destination="@id/jewelleryApplicationFragment" />
+        <action
+            android:id="@+id/action_nav_jwellery_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_invest"
+        android:name="com.goglitter.ui.Invest.InvestFragment"
+        android:label="fragment_invest"
+        tools:layout="@layout/fragment_invest" >
+        <action
+            android:id="@+id/action_nav_invest_to_investApplicationFragment"
+            app:destination="@id/investApplicationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_account"
+        android:name="com.goglitter.ui.Account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/nav_loanApplicationFragment"
+        android:name="com.goglitter.ui.Loan.LoanApplicationFragment"
+        android:label="fragment_loan_application"
+        tools:layout="@layout/fragment_loan_application" >
+        <action
+            android:id="@+id/action_nav_loanApplicationFragment_to_nav_loan"
+            app:destination="@id/nav_loan" />
+        <action
+            android:id="@+id/action_nav_loanApplicationFragment_to_termsConditionFragment"
+            app:destination="@id/termsConditionFragment" />
+        <action
+            android:id="@+id/action_nav_loanApplicationFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <dialog
+        android:id="@+id/jwelleryDialogSheetFragment"
+        android:name="com.goglitter.ui.Jewellery.JwelleryDialogSheetFragment"
+        android:label="fragment_jwellery_dialog_sheet"
+        tools:layout="@layout/fragment_jwellery_dialog_sheet" >
+        <action
+            android:id="@+id/action_jwelleryDialogSheetFragment_to_nav_loanApplicationFragment"
+            app:destination="@id/nav_loanApplicationFragment" />
+    </dialog>
+    <fragment
+        android:id="@+id/goldLoanCalculatorFragment"
+        android:name="com.goglitter.ui.GoldLoanCalculator.GoldLoanCalculatorFragment"
+        android:label="fragment_gold_loan_calculator"
+        tools:layout="@layout/fragment_gold_loan_calculator" >
+        <action
+            android:id="@+id/action_goldLoanCalculatorFragment_to_nav_loanApplicationFragment"
+            app:destination="@id/nav_loanApplicationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/jewelleryApplicationFragment"
+        android:name="com.goglitter.ui.Jewellery.JewelleryApplicationFragment"
+        android:label="fragment_jewellery_application"
+        tools:layout="@layout/fragment_jewellery_application" >
+        <action
+            android:id="@+id/action_jewelleryApplicationFragment_to_nav_jwellery"
+            app:destination="@id/nav_jwellery" />
+        <action
+            android:id="@+id/action_jewelleryApplicationFragment_to_termsConditionFragment"
+            app:destination="@id/termsConditionFragment" />
+        <action
+            android:id="@+id/action_jewelleryApplicationFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.goglitter.ui.DrawerMenu.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" >
+        <action
+            android:id="@+id/action_contactUsFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.goglitter.ui.DrawerMenu.AboutFragment"
+        android:label="fragment_about"
+        tools:layout="@layout/fragment_about" />
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.goglitter.ui.DrawerMenu.PrivacyPolicyFragment"
+        android:label="fragment_privacy_policy"
+        tools:layout="@layout/fragment_privacy_policy" />
+    <fragment
+        android:id="@+id/FAQFragment"
+        android:name="com.goglitter.ui.FAQ.FAQFragment"
+        android:label="fragment_f_a_q"
+        tools:layout="@layout/fragment_f_a_q" />
+    <fragment
+        android:id="@+id/disclaimerFragment"
+        android:name="com.goglitter.ui.DrawerMenu.DisclaimerFragment"
+        android:label="fragment_disclaimer"
+        tools:layout="@layout/fragment_disclaimer" />
+    <fragment
+        android:id="@+id/termsConditionFragment"
+        android:name="com.goglitter.ui.DrawerMenu.TermsConditionFragment"
+        android:label="fragment_terms_condition"
+        tools:layout="@layout/fragment_terms_condition" />
+    <fragment
+        android:id="@+id/glitterRateFragment"
+        android:name="com.goglitter.ui.GoldRate.GlitterRateFragment"
+        android:label="fragment_glitter_rate"
+        tools:layout="@layout/fragment_glitter_rate" />
+    <fragment
+        android:id="@+id/contactGoGlitterFragment"
+        android:name="com.goglitter.ui.DrawerMenu.ContactGoGlitterFragment"
+        android:label="fragment_contact_go_glitter"
+        tools:layout="@layout/fragment_contact_go_glitter" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.goglitter.ui.Account.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/enquiryFragment"
+        android:name="com.goglitter.ui.Account.EnquiryFragment"
+        android:label="fragment_enquiry"
+        tools:layout="@layout/fragment_enquiry" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.goglitter.ui.notification.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" >
+        <action
+            android:id="@+id/action_notificationFragment_to_notificationDetailFragment"
+            app:destination="@id/notificationDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationDetailFragment"
+        android:name="com.goglitter.ui.notification.NotificationDetailFragment"
+        android:label="fragment_notification_detail"
+        tools:layout="@layout/fragment_notification_detail" />
+    <fragment
+        android:id="@+id/investApplicationFragment"
+        android:name="com.goglitter.ui.Invest.InvestApplicationFragment"
+        android:label="fragment_invest_application"
+        tools:layout="@layout/fragment_invest_application" >
+        <action
+            android:id="@+id/action_investApplicationFragment_to_nav_home"
+            app:destination="@id/nav_home" />
+    </fragment>
+</navigation>

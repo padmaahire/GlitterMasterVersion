@@ -1,0 +1,26 @@
+Utils utilities = new Utils();
+Asymmetric asymmetric = new Asymmetric();
+EncryptionHelper helper = new EncryptionHelper();
+String skey =  randomString(16);
+byte[] key1 = skey.getBytes();          
+SecretKeySpec secretKey = new SecretKeySpec(key1, "AES");  
+byte[] plaintextKey = secretKey.getEncoded();
+
+String publicKey = "";
+
+byte[] encryptedKey = asymmetric.encrypt(plaintextKey, publicKey.getBytes(), "RSA", "RSA/ECB/PKCS1Padding");
+
+byte[] encodedEncryptedKey = utilities.encodeToBase64(encryptedKey);
+
+String sIV =  randomString(16);
+byte[] iv = sIV.getBytes();
+Symmetric symmetric = new Symmetric();
+
+byte[] encryptedContent = symmetric.encrypt(content.getBytes(), iv, plaintextKey, "AES", "AES/CBC/PKCS5Padding");
+
+byte[] ivAndEncryptedContent = helper.mergeTwoByteArrays(iv, encryptedContent);
+
+byte[] encodedIvAndEncryptedContent = utilities.encodeToBase64(ivAndEncryptedContent);
+
+contentLogger.log("ENCODED_ENCRYPTED_KEY", new String(encodedEncryptedKey));
+contentLogger.log("ENCODED_ENCRYPTED_CONTENT", new String(encodedIvAndEncryptedContent));

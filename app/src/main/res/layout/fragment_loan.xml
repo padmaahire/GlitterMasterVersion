@@ -1,0 +1,593 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.goglitter.ui.Loan.LoanFragment"
+    android:id="@+id/loan_fragment"
+   >
+
+<androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:layout_constraintTop_toTopOf="parent"
+  >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent">
+
+     <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="98dp"
+    android:background="@drawable/bg_down_rect">
+         <RelativeLayout
+             android:visibility="gone"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_marginStart="16dp"
+             android:layout_marginTop="0dp">
+             <TextView
+                 android:id="@+id/tvText"
+                 style="@style/TextAppearance.AppCompat.Medium"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:text="Finding In"
+                 android:layout_marginTop="13dp"
+                 android:textColor="@color/white" />
+             <Spinner
+                 android:layout_toRightOf="@id/tvText"
+                 android:id="@+id/tvCity"
+                 style="@style/Widget.AppCompat.Spinner"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:dropDownWidth="250dp"
+                 android:dropDownVerticalOffset="?attr/dropdownListPreferredItemHeight"
+                 android:paddingRight="0dp"
+                 android:popupBackground="@android:color/white"
+                 android:popupElevation="1dp"
+                 android:backgroundTint="@color/white"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+         </RelativeLayout>
+
+  <!--  <Spinner
+        android:id="@+id/tvCity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_toRightOf="@+id/tvText"
+        android:background="@drawable/spinner_bg"
+
+        />
+-->
+</RelativeLayout>
+
+        <com.smarteist.autoimageslider.SliderView
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="-80dp"
+            android:id="@+id/slider"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_centerInParent="true"
+            app:sliderAnimationDuration="600"
+            app:sliderAutoCycleDirection="back_and_forth"
+            app:sliderIndicatorAnimationDuration="600"
+            app:sliderIndicatorEnabled="true"
+            app:sliderIndicatorGravity="center_horizontal|bottom"
+            app:sliderIndicatorMargin="15dp"
+            app:sliderIndicatorOrientation="horizontal"
+            app:sliderIndicatorPadding="2dp"
+            app:sliderIndicatorRadius="1.2dp"
+            app:sliderIndicatorSelectedColor="#5A5A5A"
+            app:sliderIndicatorUnselectedColor="@color/gray"
+            app:sliderScrollTimeInSec="1"
+            app:sliderStartAutoCycle="true"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/_ic_rounded_rectangle_transperant">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="4dp"
+                    android:layout_weight="0.4">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center">
+                        <TextView
+                            android:id="@+id/tv1"
+                            style="@style/TextAppearance.AppCompat.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Gold Loan"
+                            android:fontFamily="@font/inter_semibold"
+                            android:textColor="@color/black"
+                            android:autoSizeTextType="uniform"/>
+
+                        <TextView
+                            android:autoSizeTextType="uniform"
+                            android:layout_below="@+id/tv1"
+                            android:id="@+id/tv2"
+                            style="@style/TextAppearance.AppCompat.Caption"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Avail maximum loan value of your gold at lowest interest rate "/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_weight="0.6">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                       >
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnLoanApply"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:background="@drawable/btn_apply_small"
+                            android:fontFamily="@font/inter_medium"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="Apply Now"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_loan_cal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                >
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tvTitle"
+                    style="@style/TextAppearance.AppCompat.Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/inter_semibold"
+                    android:textColor="@color/black"
+                    android:padding="8dp"
+                    android:autoSizeTextType="uniform"
+                    android:layout_marginLeft="8dp"
+                    android:text="Gold Loan Calculator" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tvTitle"
+                    android:background="@color/white"
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="2dp"
+                    app:cardUseCompatPadding="true">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp">
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvsubTitle"
+                            style="@style/TextAppearance.AppCompat.Medium"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_bold"
+                            android:padding="4dp"
+                            android:visibility="gone"
+                            android:text="Eligible Loan Calculator"
+                            android:textColor="@color/black" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvCaratTitle"
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvsubTitle"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/inter_semibold"
+                            android:padding="4dp"
+                            android:text="Gold Carat"
+                            android:autoSizeTextType="uniform"
+                            android:textColor="@color/black" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvCaratValue"
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tvsubTitle"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="-2dp"
+                            android:layout_marginEnd="-3dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:hint="0 carat"
+                            android:autoSizeTextType="uniform"
+                            android:padding="4dp"
+                            android:textColor="@color/medium_orange" />
+
+                        <SeekBar
+                            android:id="@+id/seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/tvCaratTitle"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:layout_marginStart="-4dp"
+                            android:layout_marginEnd="-4dp"
+                            android:max="5"
+                            android:maxHeight="5dp"
+                            android:minHeight="5dp"
+                            android:progress="0"
+                            android:progressDrawable="@drawable/seekbar_style"
+                            android:thumb="@drawable/ic_seekbar" />
+
+                        <LinearLayout
+                            android:id="@+id/lay_wt"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/seekBar"
+                            android:orientation="horizontal"
+                            android:paddingTop="0dp"
+                            android:paddingStart="-8dp"
+                            android:paddingEnd="-8dp"
+                            android:weightSum="6">
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:text="16K"
+                                android:gravity="center"
+                                android:autoSizeTextType="uniform"
+                                android:textColor="@color/medium_orange" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="18K"
+                                android:autoSizeTextType="uniform"
+                                android:textColor="@color/medium_orange" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="21K"
+                                android:autoSizeTextType="uniform"
+                                android:textColor="@color/medium_orange" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="22K"
+                                android:autoSizeTextType="uniform"
+                                android:textColor="@color/medium_orange" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="23K"
+                                android:autoSizeTextType="uniform"
+                                android:textColor="@color/medium_orange" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="24K"
+                                android:autoSizeTextType="uniform"
+                                android:textColor="@color/medium_orange" />
+
+                          <!--  <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="22K"
+                                android:textColor="@color/medium_orange" />
+
+                            <TextView
+                                style="@style/TextAppearance.AppCompat.Small"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/inter_bold"
+                                android:gravity="center"
+                                android:text="24K"
+                                android:textColor="@color/medium_orange" />
+-->
+
+                        </LinearLayout>
+
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvCaratWt"
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lay_wt"
+                            android:layout_alignParentStart="true"
+                            android:fontFamily="@font/inter_semibold"
+                            android:padding="4dp"
+                            android:text="Weight"
+                            android:autoSizeTextType="uniform"
+                            android:textColor="@color/black" />
+
+                        <com.google.android.material.textview.MaterialTextView
+                            android:id="@+id/tvGoldWt"
+                            style="@style/TextAppearance.AppCompat.Small"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/lay_wt"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="-2dp"
+                            android:layout_marginEnd="-3dp"
+                            android:fontFamily="@font/inter_bold"
+                            android:hint="0 gms"
+                            android:padding="4dp"
+                            android:textColor="@color/medium_orange" />
+
+                        <SeekBar
+                            android:id="@+id/wt_seekBar"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/tvCaratWt"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginBottom="8dp"
+                            android:max="100"
+                            android:maxHeight="5dp"
+                            android:min="5"
+                            android:layout_marginEnd="-4dp"
+                            android:layout_marginStart="-4dp"
+                            android:minHeight="10dp"
+                            android:progress="5"
+                            android:progressDrawable="@drawable/seekbar_style"
+                            android:thumb="@drawable/ic_seekbar" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardCal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/wt_seekBar"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="#F4F6F6"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="2dp"
+                            app:cardUseCompatPadding="true">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:paddingVertical="16dp">
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvLoanLabel"
+                                    style="@style/TextAppearance.AppCompat.Small"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:fontFamily="@font/inter_semibold"
+                                    android:text="Eligible Loan Amount"
+                                    android:autoSizeTextType="uniform"
+                                    android:textColor="@color/bg_circle" />
+
+                                <RelativeLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal">
+
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tvLoanAmount"
+                                        style="@style/TextAppearance.AppCompat.Medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:hint="0"
+                                        android:padding="0dp"
+                                        android:autoSizeTextType="uniform"
+                                        android:textColor="@color/primary_color" />
+                                    <com.google.android.material.textview.MaterialTextView
+                                        android:id="@+id/tvLoanAmountstar"
+                                        style="@style/TextAppearance.AppCompat.Medium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center"
+                                        android:fontFamily="@font/inter_bold"
+                                        android:text="*"
+                                        android:textSize="12dp"
+                                        android:visibility="gone"
+                                        android:layout_marginTop="-1dp"
+                                        android:layout_toRightOf="@+id/tvLoanAmount"
+                                        android:textColor="@color/primary_color" />
+                                </RelativeLayout>
+
+
+                                <com.google.android.material.textview.MaterialTextView
+                                    android:id="@+id/tvAmountlabel"
+                                    style="@style/TextAppearance.AppCompat.Caption"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:visibility="visible"
+                                    android:textSize="12sp"
+                                    android:layout_marginTop="4dp"
+                                    android:paddingHorizontal="4dp"
+                                    android:gravity="center_horizontal"
+                                    android:fontFamily="@font/inter_regular"
+                                    android:hint="As per price on 02 Dec 2022"
+                                    android:textColor="@color/gray"
+                                    android:autoSizeTextType="uniform"/>
+
+                            </LinearLayout>
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.appcompat.widget.AppCompatButton
+                            android:id="@+id/btnLoanApplybtn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/cardCal"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerInParent="true"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/btn_apply"
+                            android:fontFamily="@font/inter_medium"
+                            android:paddingLeft="10dp"
+                            android:paddingRight="10dp"
+                            android:text="Apply Now"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white" />
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvTrust"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:paddingTop="16dp"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"
+            android:text="Trusted &amp; Supported By Leading Financial Institutions"
+            android:autoSizeTextType="uniform"
+             />
+        <ImageView
+            android:id="@+id/img_sponsored"
+            android:layout_width="wrap_content"
+            android:layout_height="28dp"
+            android:scaleType="fitXY"
+            android:layout_marginStart="24dp"
+            android:visibility="gone">
+        </ImageView>
+
+      <!--  <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvSponsored"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvTrust"
+            android:orientation="horizontal"
+            tools:itemCount="1"
+            android:layout_marginStart="24dp"
+            android:paddingVertical="8dp"
+            tools:listitem="@layout/sponsored_layout" />-->
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tvPeopleView"
+            style="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/inter_semibold"
+            android:textColor="@color/black"
+            android:text="What people are saying"
+            android:autoSizeTextType="uniform"
+           />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvPeopleView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPeopleView"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="horizontal"
+            android:paddingVertical="8dp"
+            android:paddingBottom="8dp"
+            tools:itemCount="1"
+            tools:listitem="@layout/cutomer_view_layout" />
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminateTint="@color/gray"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+
+
+</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
