@@ -88,6 +88,8 @@ class MainActivity : BaseActivity(), GlitterDialogCallbackListener {
         //  getNotification()
         fetchNotification()
 
+        val versionName = getVersionName()
+        binding.btnversion.text = "Version $versionName"
 
         try {
             val pInfo: PackageInfo =
@@ -686,6 +688,16 @@ class MainActivity : BaseActivity(), GlitterDialogCallbackListener {
                 }
                 else -> {}
             }
+        }
+    }
+    private fun getVersionName(): String {
+        return try {
+            val packageInfo = packageManager.getPackageInfo(packageName, 0)
+            packageInfo.versionName
+
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+            "Unknown"
         }
     }
 

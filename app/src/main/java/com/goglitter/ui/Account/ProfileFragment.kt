@@ -3,6 +3,7 @@ package com.goglitter.ui.Account
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -66,6 +67,7 @@ class ProfileFragment : Fragment() ,UploadRequestBody.UploadCallback{
     lateinit var tokenManager: TokenManager
     var id: String = ""
     var mobile: String = ""
+    var email: String = ""
     private val user_id = ""
     private var picture_path: String? = ""
     val REQUEST_ID_MULTIPLE_PERMISSIONS = 101
@@ -86,6 +88,7 @@ class ProfileFragment : Fragment() ,UploadRequestBody.UploadCallback{
 
         id = tokenManager.getSalesId().toString()
         getUser(id)
+
         binding.tvChangePhoto.setOnClickListener() {
             if (checkAndRequestPermissions(activity)) {
                 binding.btnUpdate.isEnabled = true
@@ -96,16 +99,10 @@ class ProfileFragment : Fragment() ,UploadRequestBody.UploadCallback{
             }
         }
         binding.btnUpdate.setOnClickListener() {
-            if (!validateEmailAddr()) {
-                return@setOnClickListener
-            }
-            val email = binding.edtEmailId.text.toString()
 
             if (!picture_path.isNullOrEmpty()) {
-                // There's a new profile picture, update it
                 UpdateProfileImage()
             } else {
-                // No new picture, update the email address
                 UpdateProfileEmail(id, email)
             }
         }
@@ -236,6 +233,7 @@ class ProfileFragment : Fragment() ,UploadRequestBody.UploadCallback{
                                 val lname = it.data.result!!.regLname
                                 binding.tvFullName.setText(fname + " " + lname)
                                 var emailId=it.data.result!!.regEmail
+                                email=it.data.result!!.regEmail.toString()
                                 if(!emailId.isNullOrEmpty()){
                                     binding.tvEmailId.setText(emailId)
                                     binding.layEmail.visibility=View.GONE
@@ -363,11 +361,37 @@ class ProfileFragment : Fragment() ,UploadRequestBody.UploadCallback{
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode != Activity.RESULT_CANCELED) {
             when (requestCode) {
-                0 -> if (resultCode == Activity.RESULT_OK && data != null) {
+               /* 0 -> if (resultCode == Activity.RESULT_OK && data != null) {
                     //Bitmap selectedImage = (Bitmap) data.getExtras().get("data");
                     //binding.ivUserImage.setImageBitmap(selectedImage)
                     //picture_path =  RealPathUtil.getRealPath(requireActivity(),data.data)
                     onCaptureImageResult(data)
+                }*/
+
+                0 -> if (resultCode == Activity.RESULT_OK && data != null) {
+                    val thumbnail = data.extras!!["data"] as Bitmap?
+                    val bytes = ByteArrayOutputStream()
+                    thumbnail!!.compress(Bitmap.CompressFormat.JPEG, 90, bytes)
+                    val destination = File(
+                        Environment.getExternalStorageDirectory(),
+                        System.currentTimeMillis().toString() + ".jpg"
+                    )
+                    picture_path = RealPathUtil.getRealPath(requireActivity(), getImageUri(requireActivity(), thumbnail))
+                    val fo: FileOutputStream
+                    try {
+                        destination.createNewFile()
+                        fo = FileOutputStream(destination)
+                        fo.write(bytes.toByteArray())
+                        fo.close()
+                    } catch (e: FileNotFoundException) {
+                        e.printStackTrace()
+                    } catch (e: IOException) {
+                        e.printStackTrace()
+                    }
+                    Glide.with(this).load(picture_path)
+                        .into(binding.ivProfileImage)
+
+                    // onCaptureImageResult(data)
                 }
                 1 -> if (resultCode == Activity.RESULT_OK && data != null) {
                     val selectedImage = data.data
@@ -421,12 +445,41 @@ class ProfileFragment : Fragment() ,UploadRequestBody.UploadCallback{
         binding.ivProfileImage.setImageBitmap(thumbnail)
     }
 
-    fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+  /*  fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
         val bytes = ByteArrayOutputStream()
         inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes)
         val path = MediaStore.Images.Media.insertImage(inContext.contentResolver, inImage, "Title", null)
         return Uri.parse(path)
-    }
+    }*/
+  fun getImageUri(inContext: Context, inImage: Bitmap): Uri? {
+      val resolver = inContext.contentResolver
+      val contentValues = ContentValues().apply {
+          put(MediaStore.Images.Media.DISPLAY_NAME, "image_${System.currentTimeMillis()}.jpg")
+          put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+          put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES)
+      }
+
+      // Insert the image into the MediaStore
+      val uri = resolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, contentValues)
+
+      uri?.let {
+          try {
+              val outputStream = resolver.openOutputStream(uri)
+              outputStream?.use {
+                  inImage.compress(Bitmap.CompressFormat.JPEG, 100, it)
+              }
+          } catch (e: Exception) {
+              // Handle the exception
+              e.printStackTrace()
+          }
+      } ?: run {
+          // If insertion failed, return null
+          Log.e("getImageUri", "Failed to insert image in MediaStore")
+      }
+
+      return uri
+  }
+
 
     open fun showSnackBar(message :String) {
         val rootView: View? = getRootView()
