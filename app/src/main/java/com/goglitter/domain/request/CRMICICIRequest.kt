@@ -29,4 +29,3 @@ data class CustomData(
     var Product_Sub_Type_l:String?=null,
     var Loan_Amount_l:String?=null,
 )
-

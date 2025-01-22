@@ -1,9 +1,8 @@
 package com.goglitter.ui.Loan
 
+import CRMEncryption
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.res.AssetManager
-import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.text.*
@@ -14,7 +13,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -22,12 +20,12 @@ import androidx.navigation.Navigation
 import com.bumptech.glide.Glide
 import com.goglitter.R
 import com.goglitter.databinding.FragmentLoanApplicationBinding
+import com.goglitter.decryptionUtils.Utils
 import com.goglitter.domain.SupportList
 import com.goglitter.domain.request.*
 import com.goglitter.domain.response.CRMDecryptResponse
 import com.goglitter.domain.response.GlitterSponsors
 import com.goglitter.domain.response.LoanBanner
-import com.goglitter.ui.*
 import com.goglitter.ui.Listener.DialogCallbackListener
 import com.goglitter.ui.Listener.GlitterDialogCallbackListener
 import com.goglitter.ui.OTPActivity.DialogBaseFragment
@@ -43,28 +41,15 @@ import com.smarteist.autoimageslider.SliderAnimations
 import com.smarteist.autoimageslider.SliderView
 import com.tirgei.retrofitauthorization.data.ApiClient
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_home.*
-import kotlinx.android.synthetic.main.layout_enquiry.*
-import org.bouncycastle.jce.provider.BouncyCastleProvider
-import org.bouncycastle.openssl.PEMDecryptorProvider
-import org.bouncycastle.openssl.PEMEncryptedKeyPair
-import org.bouncycastle.openssl.PEMKeyPair
-import org.bouncycastle.openssl.PEMParser
-import org.bouncycastle.openssl.jcajce.JcaPEMKeyConverter
-import org.bouncycastle.openssl.jcajce.JcePEMDecryptorProviderBuilder
-import java.io.*
 import java.nio.charset.StandardCharsets
-import java.security.*
 import java.util.*
-import javax.crypto.Cipher
-import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 import javax.inject.Inject
 
 /**
 @author-Padma A
 date-1/6/2023
- Updated on-03/05/24
+Updated on-03/05/24
  **/
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -75,12 +60,8 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
     lateinit var binding: FragmentLoanApplicationBinding
     private var param1: String? = null
     private var param2: String? = null
-    lateinit var supportAdapter: SupportAdapter
     lateinit var img_lst: ArrayList<SupportList>
     private lateinit var dialog: OTPFragment
-    private var token: String? = null
-    var lead_lst = arrayOf("LeadID")
-    lateinit var lead_data: CRMData
     lateinit var sliderAdapter: SliderAdapter
     private lateinit var sessionManager: SessionManager
     val viewModel: AuthViewModel by viewModels()
@@ -88,8 +69,6 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
     var bannerList: ArrayList<LoanBanner> = arrayListOf()
     lateinit var crmDecryptData: CRMDecryptResponse
     private lateinit var apiClient: ApiClient
-    private var result: ByteArray? = null
-    private var privateKey: String? = null
     private var regId: String? = null
     private var crm_encrypted_key:String?=null
     private var crm_encryted_data:String?=null
@@ -102,11 +81,8 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
     var otp_phone: String? = null
     var otp_email: String = ""
     var appID: String = ""
-    var random: String = ""
-    var encryptedRandomNumber: String = ""
     private lateinit var glitterDialog: DialogBaseFragment
     private lateinit var otpDialog: OTPBaseDialogFragment
-    var base64Encoded: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -177,25 +153,7 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
                 } else ""
             }
         ))
-
-        try {
-            // Generate an RSA key pair
-            val keyPairGenerator = KeyPairGenerator.getInstance("RSA")
-            keyPairGenerator.initialize(2048) // You can adjust the key size
-            val keyPair = keyPairGenerator.generateKeyPair()
-            // Get the public and private keys
-            val publicKey = Base64.getEncoder().encodeToString(keyPair.public.encoded)
-            val privateKey = Base64.getEncoder().encodeToString(keyPair.private.encoded)
-            // Print the keys
-            println("Public Key: $publicKey")
-            println("Private Key: $privateKey")
-        } catch (e: NoSuchAlgorithmException) {
-            e.printStackTrace()
-        }
-        //Server side
-        //privateKey = "kFkpKKK51TuC1cWPyFpDcXnRAMsOWxwIuYnSwf74TC01AJy7V2FOuMxT7+PMlN5oC53uXL/tWJi7WU0N0UrWWaiUUw8oSTVqZlqnFD65Qakxwdn4LNED4GUBWd/SanrDxxmBLJCLrIVNgKflmRhHYGs8Xaox/Wi6hwJ64NvLh7UctCfEHHvAC0OALvT7ffjm9kH0QV/K72VJ85qBXT8W3wbROKvZNPkVrHuo5RtSZBcp2vT+7U0C4FeT+lzPfZ8INbOBxeM86n1nBpcr1O+0RYZrJO7izDn9YJPPg7orqXtuNGeFTmfqYkkSZRnlJPycq9UFK4wlv8D1C6VJKHZAtbRJwM3RwoifCNWZZ9QvpJOUT6I3xPJPK4KE1r/TGJgxB3L1fGIZWI7vzPNV4yv54LvjB80sisNTUvL/IpAsH9GgGklwCaBy3buwxxX6hbY3KuSfQ2xMxVYSIPk2unMYqCB2C/JBd58AyIMl54D75gEfogGmJ7bXrrQyRGeZcJaSzJMjSHpmypfhPEiVb4QztXHXWtBj/oJL8iExxJQM3tUep3uZwwXQod80mPSSS74u0zKE2tjePTklHguBG/VvmG1rKsrXEIoBX/PfHcojuj84Z5fapPhZzqf//J+qHk9lOToLBLhEraOuVPJl6E06XPtReerRBRToBCX0+tP+b0F7ag0LntJzA0n/udqGNNCyBJstv7YDLMDPdaKt9VQZeYSMmleGZ45AIvXAoMZO0NgoolL18+kZ/4r33TXiG+wBAil/MmyVpi4/Mu1JhyEAjaTHc+aslxENAfkImfcwMOppD4GNigrNQ1ejrdM3Vhwbh943TX2ebsJFIcxP/l9rzDRkcqVPg+9vVvdD+txyyYYX4TBqE3tw1EPsWjf0G/pkJPKOj9aRtGXJ0n+SfAOrVwtH+MgstUEQ/RLNf+esnXsZFgbdWJn1X/Z+B6kW07ioIcLIH1CTscuuIhLhhZH6L/oQkMQAEbDyZvD8nHPvbGvcgE4pEoWJ52wNFLfoGTtweS6isC2sYPwmzikvVJ9ldoYm3lujM6/3PWplZpxeIZjcugfoojhA0uvnaSWU9me7YpJHcKNDd7c4UyAsWdL5A0xuvVix5X9Qp9oDWfMaFPLxSKIPA/eqWRkvj2ebU/Xy0qsCQRAXsmdch43/BJU/+UwuuztpQGsTAltq8Gae5j1kWi8TLY0WuEOPf6FFzDuu8iWOQ6Fv9T2e0Em+6y2yxEvg0jOzSo5c6u7YpBJnH9XMxq6w59s1UP7xASBEUtG3pXhMTJklz1dIQPKT4oZe9bMU45UrfxW+8dcBxR/931V8Tv2BOzYL0Xyy13W1o4fmYHqeeWyHIsruHw+sJMPWx8HJF+dffDQVFsTTD40LkjGOA4mgHh0l31Ae2C3kltumQqwn4yzED+CnrOIlZgjn/Xmr3QdKOfEvEbPLGsTqZe4MWEBgennXKiC7La9iY/egCauQ36Ct3C3jMQ7lu8Umx9nedlsDykOG3QJrMaOlKDF0yctjbbpRE+dTpvi2pwEO6OWraVXhSGolDqt5AQpUFY5llwAVyQ5Guqzvvn/qZuGemIu9vi8kVo2h7eXr/vb"
-        privateKey = "MIIEowIBAAKCAQEAw1ym4ce1vfgr5esgSH425Bprb9TnfE+LeqK5EM4O+KjHcXrQXEOOtmCzVqNT2gSYY6yNmtjjOu4tnPspA4sE34iHmE0qHC8HYVTQ4f9EdfyRGBY8Z7DTn0Eaio3EkSyJZIvs3jXND61m1HD/S1wGku8xLq8M3UthY8p/lCGPwVjbnSnACFDBUs2jvlUuY4yPPMHfMFjR/xy5elSSBV/bASJt+KMgxFMOlx0dqQsOKg81L9VhHC301DxSt9Os4id9DQlQqMp2L1V30qw0rTpOzEXsg9c7JDhi7BiOSclZmvDlduy2YDGNWx/8HZYup7rzisDtc+rXDwLF2l5CjX4M/wIDAQABAoIBACuzWhE/X0Qzc35m7j3JHfZAgq/tbCq+kHDKXaOItIijGJol4t4ArrfVQcirmGI4jO4e9z4gLhRMmx92f2IvgtON8ub6u+S6EGiRVHh5ZZMPAFXnA3Qedfg10/4SYFopIELBmibK2igbndj/vdvZpg7QOqw6tCH8brin34n/R+zz02Onrr0b3ADSdZs6vM8i+Xvp1+CnIr0TgSQJRPKLbCcvAIWIgF5JSWsO+fl3ll2r7z6Q6PlFBXRmZuaVDO9/yxcDVKmkRHnhmvXFdYUO4ISfBw0NTtLd4vQhyH+75gXTf/WLXG9++ec1Eoxk1i0jDhXh1cVBMqDIqUA1DlWFa4ECgYEA6kTaqqaCZ7WzwSjAve/GxtCGknlLNo+syV0k6SX1l4suy/bxMxKKMZ9QYAHlUFZyhKCVhxUxeNWW4pvYrUm8zlEO9xzzOvvsVw55fYPc9vpuUn47dWemOSHyloRoCQmQmAFi9XEqQWyrXztGB3jEEVwZL/gj51tSYQ18pL7yVhECgYEA1Xvg9U6fLpL/7akzoGgKpON6KxLaavSr+F1ELakinsdpVcp+56OBnxMsjpD6TDqH28DFNAaaKG3rcJTAePwmUvjqJngOldQZWDz2GR343w7UQSvhRneL/BKR3/7cFIli/twW9KSCRyS/LpC9Nrm8FV2qZolGsaP8NxpxvghQ4g8CgYAvlOKQ7Jbp95bV8bAMI+pMsUfT8jzbjRz8HSYFEMesCwHrPXHJ/McCwyfxCBGKWrSRyYf1UtGkiEVIK3073REzGnWerUudvFNJb1AvtRupMj48FRWAiBfT3NhHyAbVZxLuPMHbtitt9GNuSTy1ActY90rKWmz4bazyt2mMkJfp8QKBgQCT0fIjiWwZcLn7kzRnNoNgRw65spVAh+hn0hS6VSnerY9XUx5qQEIpprosgWB+1exqkmE6M/QcWHg0/RsE6vuSaj6fonPe9P0Tpyp0m9dOhFMeSUb0ZySrxyPw6OT052h/tl/CyAJZRq2Gjbwmn5cHaFLsKtOjfzvN3+awQcvXqwKBgAewDoXe1LMoZdxZMjsST0GZAOTToG0NFX5pNMTjgvqm1Tr3/a9N8iQCMQo4I4JYxjJPl9p/4NRfc9sXk83xHYT5lMVxX908YQZ/JS1eZqlsoohHKhMNJzuiEKn16RQaeucY8QxVr2D3mJ0+xv8oeQZTtkN9ixNw2pyhWHIjvSsn"
-
+        //Firebase Analytics
         val mFirebaseAnalytics = FirebaseAnalytics.getInstance(requireContext())
         val params = Bundle()
         params.putString("loan_apply", "goGlitter") // Using "loan_apply" as the parameter name
@@ -209,7 +167,6 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
         getSponsored()
         img_lst = ArrayList()
         img_lst.add(SupportList("", R.drawable.img_support))
-
     }
 
     override fun onClick(v: View?) {
@@ -373,7 +330,7 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
         key: String,
         data: String
     ) {
-        val request = CrmLoanRequest(key, data)
+         val request = CrmLoanRequest(key, data)
         Log.d("DDDD",request.toString())
         viewModel.crmLoanData(request)
         viewModel.crmLeadData.observe(this) {
@@ -386,42 +343,25 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
                     binding.progressCircular.isVisible = false
                 }
                 is NetworkResult.Success -> {
-                  //  val response = it.data.toString().toObject<CRMResponse>()
                     val response = it.data
                     if(response.status.equals("success")){
                         binding.progressCircular.isVisible = false
                         showSnackBar(it.data.msg!!)
-
                         crm_encrypted_key=response.result!!.encryptedKey
-                        crm_encryted_data=response.result!!.encryptedData
+                         crm_encryted_data=response.result!!.encryptedData
 
-                        if(!crm_encryted_data.isNullOrEmpty() && !crm_encrypted_key.isNullOrEmpty()) {
-                            decryption(crm_encrypted_key!!, crm_encryted_data!!)
-                        }
-                        glitterDialog.dismiss()
-                        Handler().postDelayed({
-                            Navigation.findNavController(requireView()!!).navigate(R.id.action_nav_loanApplicationFragment_to_nav_home)
-                        }, 2000)
+                         if(!crm_encryted_data.isNullOrEmpty() && !crm_encrypted_key.isNullOrEmpty()) {
+                             decryption(crm_encrypted_key!!, crm_encryted_data!!)
+                         }
+                         glitterDialog.dismiss()
+                         Handler().postDelayed({
+                             Navigation.findNavController(requireView()!!).navigate(R.id.action_nav_loanApplicationFragment_to_nav_home)
+                         }, 2000)
 
                     }else{
                         binding.progressCircular.isVisible = false
                         showSnackBar(it.data.msg.toString())
                     }
-                   /* if (it.data.status.equals("success")) {
-                        binding.progressCircular.isVisible = false
-                        showSnackBar(it.data.msg!!)
-                        glitterDialog.dismiss()
-
-
-                        Handler().postDelayed({
-                            Navigation.findNavController(requireView()!!).navigate(R.id.action_nav_loanApplicationFragment_to_nav_home)
-                        }, 2000)
-
-
-                    } else {
-                        binding.progressCircular.isVisible = false
-                        showSnackBar(it.data.msg.toString())
-                    }*/
                 }
                 else -> {}
             }
@@ -536,8 +476,6 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
                         if(mobile!=null){
                             binding.edtPhoneNumber.setText(mobile)
                         }
-
-
                     } else {
                         showSnackBar(it.data.msg.toString())
                     }
@@ -585,37 +523,6 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
             }
         }
     }
-    private fun CRMDecrypt(key: ByteArray, data: ByteArray) {
-        val utilities = CrmUtils()
-        val symmetric = Symmetric()
-        val asymmetric = Asymmetric()
-        val helper = DecryptionHelper()
-        val decodedKey = utilities.decodeFromBase64(key)
-        val decodedContent = utilities.decodeFromBase64(data)
-        val extractedIv = helper.extractBytes(decodedContent, 0, 16)
-        val extractedEncryptedContent = helper.extractBytes(decodedContent, 16, decodedContent.size)
-        /*val _privateKey=loadPrivateKeyFromPEM(requireContext(),"private.pem","glitter")
-        Log.d("_privateKEY",_privateKey.toString())*/
-        val decryptedKey = asymmetric.decrypt(
-            decodedKey,
-            privateKey!!.toByteArray(),
-            "RSA",
-            "RSA/ECB/PKCS1Padding"
-        )
-        if (decryptedKey != null) {
-            val decryptedContent = symmetric.decrypt(
-                extractedEncryptedContent,
-                extractedIv,
-                decryptedKey,
-                "AES",
-                "AES/CBC/PKCS5Padding"
-            )
-            Log.d("DECODED_DECRYPTED_CONTENT", String(decryptedContent))
-        } else {
-            Log.d("NULL", "NULL")
-        }
-
-    }
     fun validateName(): Boolean {
         val mobile = binding.edtName.text.toString().trim()
         if (!TextUtils.isEmpty(mobile)) {
@@ -650,7 +557,6 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
             return false
         }
     }
-
     fun validateLastName(): Boolean {
         val mobile = binding.edtLastName.text.toString().trim()
         if (!TextUtils.isEmpty(mobile)) {
@@ -711,117 +617,224 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
             return false
         }
     }
+
+    //Push data to CRM on Dialog
     override fun DialogDone() {
+        hybrid_Encryption()
+    }
+    //Encryption
+    private fun hybrid_Encryption() {
         val number: String = binding.edtPhoneNumber.getText().toString().trim()
         val emailID=binding.edtEmailId.text.toString().trim()
         val fname=binding.edtName.text.toString().trim()
         val lname=binding.edtLastName.text.toString().trim()
         val pincode=binding.edtPinCode.text.toString().trim()
 
-     /*   val crmDataJson = """
-        {
-            "name": "${binding.edtName.text}",
-            "id": "$id",
-            "lastName": "${binding.edtLastName.text}",
-            "emailId": "${binding.edtEmailId.text}",
-            "phoneNumber": "${number}"
-        }
-        """.trimIndent()*/
-
-       //for demos "CampaignKey": "702167"
-       //for Live "CampaignKey": "833883"
-
-      //  "C_Pincode_l": "500019",
-
         val crmDataJson = """
-    {
-        "CampaignKey": "833883",
-        "Custom": {
-            "Source_of_Lead_l": "7",
-            "Type_l": "1",
-            "Transaction_ID_l": "CRA208271",
-            "Field279": "19863",
-            "Routing_Parameter_l": "",
-            "Business_Line_l": "25",
-            "SUB_Agent_code_l": "1234",
-            "C_Pincode_l": "${pincode}",
-            "Product_Sub_Type_l": "GLD",
-            "Loan_Amount_l": ""
-        },
-        "Email": "${emailID}",
-        "FirstName": "${fname}",
-        "LastName": "${lname}",
-        "MiddleName": "",
-        "LayoutKey": "102166",
-        "OwnerCode": "1",
-        "LeadOwnerTypeID": "1",
-        "MobilePhone": "${number}",
-        "ProductCategoryID": "2001",
-        "ProductKey": "2004",
-        "RatingKey": "1",
-        "SalutationKey": "1",
-        "StatusCodeKey": "141"
-    }
+ 
+            {
+                "IsAsync": false,
+                "CallBackUrl": "",
+                "LeadType": "Individual",
+                "LeadDetails": {
+                    "LeadNumber": "",
+                    "CountryCode": "+91",
+                    "MobileNumber": "${number}",
+                    "Product": "CRM728",
+                    "ProductSubType": "",
+                    "AlternateContactNumber": "",
+                    "LeadStatus": "LS0122",
+                    "LeadType": "Ind",
+                    "AssignedToSelf": "True",
+                    "AssignmentBasedOn": "",
+                    "BranchSolId": "",
+                    "CustomerType": "New",
+                    "Salutation": "MISS",
+                    "FirstName": "${fname}",
+                    "MiddleName": "K",
+                    "LastName": "${lname}",
+                    "LeadSource": "LSM0069",
+                     "PartnerId":"", 
+                    "CampaignName": "",
+                    "AccountNumber": "",
+                    "AccountType": "",
+                    "Remarks": "",
+                    "LeadChannel": "Digital",
+                    "DateOfBirth": "",
+                    "Nationality": "",
+                    "PANNumber": "",
+                    "Gender": "",
+                    "ServiceFlag": "",
+                    "EmailAddress": "${emailID}",
+                    "ResidencePhone": "",
+                    "OfficePhone": "",
+                    "ResidencyStatus": "",
+                  "PreferredCallTime": "",
+                    "PreferredCallStartTime": "",
+                    "PreferredCallEndTime": "",
+                    "ModeOfCommunication": "",
+                    "timezone": "",
+                    "overseascountry": "",
+                    "CustomerSegment": "",
+                    "AssignmentType": "",
+                    "AssignmentId": "",
+                    "ReferralType": "",
+                    "ReferredByOtherName": "",
+                    "ReferredByOtherEmail": "",
+                    "ReferredByOtherPhone": "",
+                    "ReferrerEmployeeId": "",
+                    "ReferredByLeadId":"",
+                     "ReferredByChannelPartnerId":"",
+                    "CustomerId": "",
+                    "UCIC": "",
+                    "ReferrerCustomerId": "",
+                    "ReferrerUCIC": "",
+                    "ReferrerPanNumber": "",
+                    "ReferrerUCC": "",
+                    "ReferrerAccountNumber": "",
+                    "ReferrerMobileNumber": "",
+                    "CVCESegment": "",
+                    "AffluentCustomer":true,
+                    "UTMCampaign": "",
+                    "UTMFEDID": "",
+                    "UTMGAID": "",
+                    "UTMGCIID": "",
+                    "UTMITM": "",
+                    "UTMLeadPriority": "",
+                    "UTMLeadPropensity": "",
+                    "UTMLeadScore": "",
+                    "UTMNTBID": "",
+                    "AggregatorLeadSource": "",
+                    "SMSShortCode": "",
+                    "PincodeLead": "",
+                    "DropOffPageName": "",
+                    "DropoffPageNumber": "",
+                    "TimeSpentonPage": "",
+                    "BREResponse": "",
+                    "FirstTimePAOfferFlag": "",
+                    "PAOffer": "",
+                    "TimeOfLeadDrop": "",
+                    "UTMLms": "",
+                    "Medium": "",
+                    "OnlineCoversionSR": "",
+                    "UotmCode": "",
+                    "UTMInfo": "",
+                    "Priority": "",
+                    "IndividualOrganizationName": "",
+                    "ReferrerOrganizationName": "",
+                    "LeadGenerator": "",
+                      "PPACode": "",
+                      "DestCode": "",
+                     "FedIDoftheCustomer": "",
+                    "EmployeeIDandSOLIDwhoassistedthecustomer": "",
+                    "Successorfailurestatusonfinalpageofjourney": "",
+                    "ParentLeadNumber":""
+                },
+                "AddressDetails": [
+                    {
+                        "AddressType": "",
+                        "AddressLine1": "",
+                        "AddressLine2": "",
+                        "AddressLine3": "",
+                        "AddressLine4": "",
+                        "Landmark": "",
+                        "Locality": "",
+                        "Village": "",
+                        "City": "",
+                        "District": "",
+                        "State": "",
+                        "Country": "",
+                        "Pincode": "",
+                        "Latitude": "",
+                        "Longitude": ""
+                    },
+                    {
+                        "AddressType": "",
+                        "AddressLine1": "",
+                        "AddressLine2": "",
+                        "AddressLine3": "",
+                        "AddressLine4": "",
+                        "Landmark": "",
+                        "Locality": "",
+                        "Village": "",
+                        "City": "",
+                        "District": "",
+                        "State": "",
+                        "Country": "",
+                        "Pincode": "",
+                        "Latitude": "",
+                        "Longitude": ""
+                    }
+                ],
+                "OrganisationDetails": {
+                    "CompanyName": "",
+                    "AccountNumber": "",
+                    "UCC": "",
+                    "PpaCode": "",
+                    "MobileNo": "",
+                    "EmailAddress": "",
+                    "PanNumber": "",
+                    "DateOfIncorporation": "",
+                    "ContactPersonFirstName": "",
+                    "ContactPersonMiddleName": "",
+                    "ContactPersonLastName": "",
+                    "ContactPersonMobileNumber": "",
+                    "ContactPersonPanNumber": "",
+                    "ContactPersonUCIC": ""
+                },
+                "AppointmentDetails": {
+                    "EngagementType": "",
+                    "IsJointActivity": "",
+                    "InitiatedBy": "",
+                    "PurposeOfMeeting": "",
+                    "PlaceOfMeeting": "",
+                    "StartDateTime": "",
+                    "AppointmentStatus": ""
+                },
+                "ApplicationDetails": {
+                    "GoldLoanRequest": {
+                        "TransactionId": "",
+                        "LoanAmount": "",
+                        "LoanTenure": "",
+                        "LoanAccountNumber": "",
+                        "LoanAmountDisbursed": "",
+                        "DisbursalDate": "",
+                        "InstanceId": "",
+                        "ROI": "",
+                        "ApplicantId_CustId": "",
+                        "AssessmentId": "",
+                        "VariantFacilityType": "",
+                        "Gender": "",
+                        "MaritalStatus": "",
+                        "Religion": "",
+                        "Education": "",
+                        "SourceOfFunds": "",
+                        "GrossAnnualIncome": "",
+                        "PersonWithDisability": "",
+                        "VernacularDeclaration": "",
+                        "FatherName": "",
+                        "MotherMaidenName": "",
+                        "SubAgentCode": ""
+                    }
+                }
+            }
 """.trimIndent()
-        //Encryption
-        val utilities = CrmUtils()
-        val asymmetric = Asymmetric()
-        val helper = EncryptionHelper()
-        val skey = EncryptionHelper.randomString(16)
-        val key1 = skey.toByteArray()
-        val secretKey = SecretKeySpec(key1, "AES")
-        val plaintextKey = secretKey.encoded
+        Log.d("JSON_DATA",crmDataJson.toString())
 
-        //Client Public key
-       // val publicKey = "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsIwVStQi6aSMLBZu3vhafOR5NTMNp+TXPwyk/6VoaSQfDnZaSQPYhdt4a8X215KwXwpIL1eBJOH2NW8jp5AO4WauHWEwEggJvPaC8FgzZtDhjYexOk+/yaDbY7U9BofJSU76VIBxRoN7YmAknAKrpfn0ukXPPuUx5Ny/cy85nunqo5M8Acf2VVwSGZQMBZFSm3yxYOdS4laDlM+s1w+5wLDMjYSgIMm76rpVdO3hs2n2dSAYM6XMOaqNDwHdZk6n8lPgivYVXjTz7KU9eqkFnecWvn2ugRI7hgrplZxS020k0QBeYd0AH7zJZKS3Xo5VycL01UO/WYOQvB7v8lge7TiQZ3CCrnuykqcJ/r5DMLO/cKQAeZi+LQ95FQg39joO8G7bfO7+a3Gs8Re3mRW7AA8x1aEn7XZMOUu4l4IfNvwh20V4cz3xvGXdr9ZLFvgX5593MxCDBjkiaynzG8gmLVTIoaItPy+khwO/vjfWka0L3yvT3l55R4H/KRKxlHaY58HVdLbuWrUoH/4gbkYFYFC+rejBW5wbE0FJmWIkEXLKsTlXcsn6eAzi4BRxidQ/4rIEf8qWpSFzJobivBnWe4bpBA19g3N47PDpD5xS6uj7ODSBhEn22UnsiDaGV+RhsXYA/xqaJCjB6+W7CN00Lowr87sUoT4VAK8wrOk4D5sCAwEAAQ=="
-        val publicKey = "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAnTUPa8kgiS5bYZnm3+SqRsZttkVfqoV1BgsnPDki+dOEJToTi3k3cVDyVtPxHbUjoCsT9Szd1qB+NMIt2hK3OZ9OfnK7pqrwmKZRNdz709ycwurzkEDbtfs1o/68SNe/1QI7szkTUEglP97QDvTg5otKKuA81DbRotl6euPyX2mnS0ArfGFRMX0MVblZdNmhJYe9acRXre7GclBamS6tM8z3hqB2FzZV+3PJroyYYQckTkoXUeTzOWiyrGHgBLvUZWEBONUQRvxcsk1HaSANkDvSvDdwqn3rYnFFZfnhCYtRn5cJ1oTZ9+bAeJCvZ+itRvVrppKNeFLt4ztE+aJPIEp0Df6kXtzuxKjo7vVQ4KbtboR+bfrUuLTNsuWQfQK7aIeU4z5g0QH/xqn79Rphx4JL5ohy+vLiPk6gG5cX3Sil1fGDT3pj28XN+HPWCb7jcmzcGd8b1gchC58w4DNGhhkEO0TEbUg/ZcFVfyP6CZ/rlPK2aFyjNaxMqVfB/ctRgTqH3ANZ1UaessrxRTywaaevTd7bRsmExrrb1ukR0mggysZcC0Jkt3/hu2TKxzphv6a7WNjx9wd12rtBoA6SyUEgxvxtDrvjWuQFGCoFRif7NFu+n/riyg3KaluGysdM2b1psUgXng5RDNAaAnn8IRXuM3nUQRrBx51JBoN/uXkCAwEAAQ=="
+        var crmEncryption=CRMEncryption(crmDataJson)
 
-        var encryptedKey: ByteArray? = ByteArray(0)
-        try {
-            encryptedKey = asymmetric.encrypt(
-                plaintextKey,
-                publicKey.toByteArray(),
-                "RSA",
-                "RSA/ECB/PKCS1Padding"
-            )
+        // Get the encrypted values
+        val encryptedData = crmEncryption.getEncryptedValues()
 
-            Log.d("NEW KEY",encryptedKey.toString())
+        // Access encryptedKey and encryptedData
+        val encodedEncryptedKey = encryptedData.encryptedKey
+        val encodedIvAndEncryptedContent = encryptedData.encryptedData
 
-        } catch (e: GeneralSecurityException) {
-            e.printStackTrace()
-        }
-        val encodedEncryptedKey = utilities.encodeToBase64(encryptedKey)
-        val sIV = EncryptionHelper.randomString(16)
-        val iv = sIV.toByteArray()
-        val symmetric = Symmetric()
+        Log.d("ENCRYPTED_KEY", encodedEncryptedKey)
+        Log.d("ENCRYPTED_CONTENT", encodedIvAndEncryptedContent)
 
-        val encryptedContent = symmetric.encrypt(
-            crmDataJson.toByteArray(),
-            iv,
-            plaintextKey,
-            "AES",
-            "AES/CBC/PKCS5Padding"
-        )
-        val ivAndEncryptedContent = helper.mergeTwoByteArrays(iv, encryptedContent)
+        PostToCRM(encodedEncryptedKey, encodedIvAndEncryptedContent)
 
-        Log.d("NEW DATA",ivAndEncryptedContent.toString())
-
-        val encodedIvAndEncryptedContent = utilities.encodeToBase64(ivAndEncryptedContent)
-
-        Log.d("ENCODED_ENCRYPTED_KEY", String(encodedEncryptedKey))
-        Log.d("ENCODED_ENCRYPTED_CONTENT", String(encodedIvAndEncryptedContent))
-        // CRMDecrypt(encodedEncryptedKey, encodedIvAndEncryptedContent!!)
-
-        /*PostToCRM(
-                encodedEncryptedKey.toString(),
-                encodedIvAndEncryptedContent.toString()
-            )*/
-
-        PostToCRM(
-            String(encodedEncryptedKey),
-            String(encodedIvAndEncryptedContent)
-        )
-    //    Navigation.findNavController(requireView()!!).navigate(R.id.action_nav_loanApplicationFragment_to_nav_home)
     }
     override fun onCustomerDialogOk() {}
     override fun onCustomerDialogCancel() {}
@@ -833,10 +846,6 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
             "ok"
         )
         dialog.show(requireActivity()!!.supportFragmentManager, "signature")
-    }
-    override fun onResume() {
-        super.onResume()
-       // supportAdapter.updateSponsors(sponosorsList)
     }
     private val watcher: TextWatcher = object : TextWatcher {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
@@ -895,10 +904,6 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
     override fun finishThisActivity() {
         requireActivity().finish()
     }
-    fun View.showKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
-    }
     open fun showSnackBar(message: String) {
         val rootView: View? = getRootView()
         if (rootView != null) Snackbar.make(rootView, message, Snackbar.LENGTH_LONG).show()
@@ -910,201 +915,5 @@ class LoanApplicationFragment : Fragment(), View.OnClickListener, GlitterDialogC
         if (rootView == null) rootView = activity?.window?.decorView?.rootView
         return rootView
     }
-    fun loadPrivateKeyFromPEM(
-        context: Context,
-        pemFilePath: String,
-        password: String
-    ): PrivateKey? {
-        Security.addProvider(BouncyCastleProvider())
-
-        try {
-            // Use AssetManager to open the file from the assets directory
-            val assetManager: AssetManager = context.assets
-            val inputStream = assetManager.open(pemFilePath)
-            val reader = InputStreamReader(inputStream)
-            // Use the InputStreamReader to create a PEMParser
-            val pemParser = PEMParser(reader)
-            // Read the object from the PEMParser
-            val pemObject = pemParser.readObject()
-
-            // Check if the object is an encrypted key pair
-            if (pemObject is PEMEncryptedKeyPair) {
-                val decryptorBuilder = JcePEMDecryptorProviderBuilder()
-                val decryptor: PEMDecryptorProvider = decryptorBuilder.build(password.toCharArray())
-                // Decrypt the encrypted key pair
-                val keyPair = JcaPEMKeyConverter().getKeyPair(pemObject.decryptKeyPair(decryptor))
-                // Return the private key from the decrypted key pair
-                return keyPair.private as PrivateKey
-            } else if (pemObject is PEMKeyPair) {
-                // Convert the key pair to a KeyPair object
-                val keyPair = JcaPEMKeyConverter().getKeyPair(pemObject)
-
-                // Return the private key from the key pair
-                return keyPair.private as PrivateKey
-            }
-        } catch (e: Exception) {
-            // Handle the exception or log it
-            e.printStackTrace()
-        }
-
-        return null
-    }
-
-    //working
-    fun decryptAESCBC(encryptedData: String, key: ByteArray): String {
-        Log.d("Key", key.toString())
-
-        // Convert the string to bytes
-        val stringBytes = key!!
-        // Create a 16-byte array
-        result = ByteArray(16)
-        stringBytes.copyInto(result!!, 0, 0, minOf(stringBytes.size, 16))
-
-        val convertedKey = convertKeyTo16Bytes(key)
-        try {
-            val combined = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                Base64.getDecoder().decode(encryptedData)
-            } else {
-                TODO("VERSION.SDK_INT < O")
-            }
-            // Extract the first 16 bytes as IV
-            val iv = combined.copyOfRange(0, 16)
-            // val encryptedBytes = combined.copyOfRange(16, combined.size)
-            val encryptedBytes = combined.copyOfRange(0, 16)
-            val cipher = Cipher.getInstance("AES/CBC/PKCS5Padding")
-            val keySpec = SecretKeySpec(result, "AES")
-            val ivSpec = IvParameterSpec(iv)
-
-            cipher.init(Cipher.DECRYPT_MODE, keySpec, ivSpec)
-            val decryptedBytes = cipher.doFinal(encryptedBytes)
-
-            return String(decryptedBytes, Charsets.UTF_8)
-        } catch (e: Exception) {
-            // Print the exception for debugging
-            e.printStackTrace()
-            return "Decryption failed"
-        }
-    }
-    fun generateRsaPrivateKey(): PrivateKey {
-        // Initialize KeyPairGenerator
-        val keyPairGenerator = KeyPairGenerator.getInstance("RSA")
-
-        // Set the key size (2048 bits is commonly used)
-        keyPairGenerator.initialize(2048)
-
-        // Generate key pair
-        val keyPair: KeyPair = keyPairGenerator.generateKeyPair()
-
-        // Extract and return the private key
-        return keyPair.private
-    }
-    fun convertKeyTo16Bytes(key: ByteArray): ByteArray {
-        // If the key is already 16 bytes, return it as is
-        if (key.size == 16) {
-            return key
-        }
-
-        // If the key is less than 16 bytes, pad it with zeros
-        if (key.size < 16) {
-            val paddedKey = ByteArray(16)
-            System.arraycopy(key, 0, paddedKey, 0, key.size)
-            return paddedKey
-        }
-
-        // If the key is more than 16 bytes, truncate it
-        return key.copyOfRange(0, 16)
-    }
-
-
 }
-//Encryption
-/*   val crmDataJson = """
-{
-"name": "${binding.edtName.text}",
-"id": "$id",
-"lastName": "${binding.edtLastName.text}",
-"emailId": "${binding.edtEmailId.text}",
-"phoneNumber": "$number"
-}
-""".trimIndent()
-   val utilities = CrmUtils()
-   val asymmetric = Asymmetric()
-   val helper = EncryptionHelper()
-   val skey = EncryptionHelper.randomString(16)
-   val key1 = skey.toByteArray()
-   val secretKey = SecretKeySpec(key1, "AES")
-   val plaintextKey = secretKey.encoded
-   //Client Public key
-   val publicKey = "MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAsIwVStQi6aSMLBZu3vhafOR5NTMNp+TXPwyk/6VoaSQfDnZaSQPYhdt4a8X215KwXwpIL1eBJOH2NW8jp5AO4WauHWEwEggJvPaC8FgzZtDhjYexOk+/yaDbY7U9BofJSU76VIBxRoN7YmAknAKrpfn0ukXPPuUx5Ny/cy85nunqo5M8Acf2VVwSGZQMBZFSm3yxYOdS4laDlM+s1w+5wLDMjYSgIMm76rpVdO3hs2n2dSAYM6XMOaqNDwHdZk6n8lPgivYVXjTz7KU9eqkFnecWvn2ugRI7hgrplZxS020k0QBeYd0AH7zJZKS3Xo5VycL01UO/WYOQvB7v8lge7TiQZ3CCrnuykqcJ/r5DMLO/cKQAeZi+LQ95FQg39joO8G7bfO7+a3Gs8Re3mRW7AA8x1aEn7XZMOUu4l4IfNvwh20V4cz3xvGXdr9ZLFvgX5593MxCDBjkiaynzG8gmLVTIoaItPy+khwO/vjfWka0L3yvT3l55R4H/KRKxlHaY58HVdLbuWrUoH/4gbkYFYFC+rejBW5wbE0FJmWIkEXLKsTlXcsn6eAzi4BRxidQ/4rIEf8qWpSFzJobivBnWe4bpBA19g3N47PDpD5xS6uj7ODSBhEn22UnsiDaGV+RhsXYA/xqaJCjB6+W7CN00Lowr87sUoT4VAK8wrOk4D5sCAwEAAQ=="
-   var encryptedKey: ByteArray? = ByteArray(0)
-   try {
-       encryptedKey = asymmetric.encrypt(
-           plaintextKey,
-           publicKey.toByteArray(),
-           "RSA",
-           "RSA/ECB/PKCS1Padding"
-       )
-   } catch (e: GeneralSecurityException) {
-       e.printStackTrace()
-   }
-   val encodedEncryptedKey = utilities.encodeToBase64(encryptedKey)
-   val sIV = EncryptionHelper.randomString(16)
-   val iv = sIV.toByteArray()
-   val symmetric = Symmetric()
-
-   val encryptedContent = symmetric.encrypt(
-       crmDataJson.toByteArray(),
-       iv,
-       plaintextKey,
-       "AES",
-       "AES/CBC/PKCS5Padding"
-   )
-   val ivAndEncryptedContent = helper.mergeTwoByteArrays(iv, encryptedContent)
-   val encodedIvAndEncryptedContent =
-       utilities.encodeToBase64(ivAndEncryptedContent)
-
-   Log.d("ENCODED_ENCRYPTED_KEY", String(encodedEncryptedKey))
-   Log.d("ENCODED_ENCRYPTED_CONTENT", String(encodedIvAndEncryptedContent))
-   // CRMDecrypt(encodedEncryptedKey, encodedIvAndEncryptedContent!!)
-
-    PostToCRM(
-          encodedEncryptedKey.toString(),
-          encodedIvAndEncryptedContent.toString(),
-        binding.edtName.text.toString(),
-        id,
-        binding.edtLastName.text.toString(),
-        binding.edtEmailId.text.toString(),
-        number
-      )*/
-/*Sample Request
-     {
-         "CampaignKey": "702167",
-         "Custom": {
-         "Source_of_Lead_l": "7",
-         "Type_l": "1",
-         "Transaction_ID_l": "CRA208271",
-         "Field279": "19863",
-         "Routing_Parameter_l": "",
-         "Business_Line_l": "25",
-         "SUB_Agent_code_l": "1234",
-         "C_Pincode_l": "500019",
-         "Product_Sub_Type_l": "GLD",
-         "Loan_Amount_l": "10000"
-     },
-         "Email": "John345@gmail.com",
-         "FirstName": "John",
-         "LastName": "George",
-         "MiddleName": "",
-         "LayoutKey": "102166",
-         "OwnerCode": "1",
-         "LeadOwnerTypeID": "1",
-         "MobilePhone": "9893453535",
-         "ProductCategoryID": "2001",
-         "ProductKey": "2004",
-         "RatingKey": "1",
-         "SalutationKey": "1",
-         "StatusCodeKey": "141"
-     }
-*/
-
 //https://glitter-india.com/api.glitter-india.com/web/version_1/api/applicationDetails

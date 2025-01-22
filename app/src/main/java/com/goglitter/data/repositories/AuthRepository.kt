@@ -310,6 +310,14 @@ class AuthRepository  @Inject constructor(private val apiService: API) {
         emit(NetworkResult.Failure(Utils.resolveError(e)?:"Unknown Error"))
     }
 
+    /*suspend fun crmLoanData(request: CrmRequest) = flow {
+        emit(NetworkResult.Loading(true))
+        val response=apiService.crmLoanData(request)
+        emit(NetworkResult.Success(response))
+    }.catch { e->
+        emit(NetworkResult.Failure(Utils.resolveError(e)?:"Unknown Error"))
+    }
+*/
 
     suspend fun getInvestList()  = flow {
         emit(NetworkResult.Loading(true))

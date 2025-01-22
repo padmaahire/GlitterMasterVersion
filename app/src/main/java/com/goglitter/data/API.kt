@@ -192,6 +192,9 @@ interface API {
     @POST(CRM_LOAN_APPLICATION)
     suspend fun crmLoanData(@Body Request: CrmLoanRequest): CRMResponse
 
+   /* @POST(CRM_LOAN_APPLICATION)
+    suspend fun crmLoanData(@Body Request:CrmRequest): CRMResponse*/
+
     @GET(INVESTMENT_LIST)
     suspend fun investList(): InvestCategoryResponse
 

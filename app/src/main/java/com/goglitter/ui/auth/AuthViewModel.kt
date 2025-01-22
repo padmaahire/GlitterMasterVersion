@@ -426,6 +426,13 @@ class AuthViewModel @Inject constructor(private var authRepository: AuthReposito
             }
         }
     }
+    /*fun crmLoanData(request: CrmRequest) {
+        viewModelScope.launch {
+            authRepository.crmLoanData(request).collect {
+                _crmLeadData.postValue(it)
+            }
+        }
+    }*/
 
     fun getInvestorCategoryList() {
         viewModelScope.launch {
